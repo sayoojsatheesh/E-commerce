@@ -1,0 +1,25 @@
+.MainContainer{
+    position: relative;
+    height: 342px;
+}
+
+.Image {
+  height: 100%;
+  width: 100%;
+}
+
+.button{
+    position: absolute;
+    left: 5.5%;
+    bottom: 5.5%;
+    padding: 6px 20px;
+    font-size: .8rem;
+    font-weight: bold;
+    border: none;
+    background-color: white;
+    border-radius: 24px;
+}
+
+.button,.MainContainer:hover{
+    cursor: pointer;
+}
