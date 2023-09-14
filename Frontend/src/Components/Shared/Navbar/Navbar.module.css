@@ -1,5 +1,5 @@
 .NavbarContainer {
-  padding: 2rem 1.5rem;
+  padding: 1rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,10 +8,6 @@
 .Logo {
   width: 70px;
   height: 35px;
-}
-
-.Logo:hover {
-  cursor: pointer;
 }
 
 .IconContainer {
@@ -24,11 +20,7 @@
   color: gray;
 }
 
-.IconColor:hover {
-  cursor: pointer;
-}
-
-.Catagories:hover {
+.IconColor,.Catagories,.Logo:hover {
   cursor: pointer;
 }
 

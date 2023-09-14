@@ -25,7 +25,7 @@ const Navbar = () => {
         <img
           src={"/Images/logo.svg"}
           className={classes.Logo}
-          
+          alt="logo"
         />
       </div>
       {dontShowMenuIcon ? null : (

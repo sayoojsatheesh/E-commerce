@@ -26,7 +26,6 @@ const SearchBar = () => {
             autoCapitalize="off"
             autoComplete="off"
             title="Search"
-            role="combobox"
             placeholder="Search"
           />
         </div>
