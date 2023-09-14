@@ -1,0 +1,46 @@
+.NavbarContainer {
+  padding: 2rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Logo {
+  width: 70px;
+  height: 35px;
+}
+
+.Logo:hover {
+  cursor: pointer;
+}
+
+.IconContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.9rem;
+}
+
+.IconColor {
+  color: gray;
+}
+
+.IconColor:hover {
+  cursor: pointer;
+}
+
+.Catagories:hover {
+  cursor: pointer;
+}
+
+.ExtraPadding {
+  padding: 2rem 4rem;
+}
+
+.MiddleSection {
+  width: 25%;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-family: Urbanist, sans-serif;
+}
