@@ -1,5 +1,11 @@
-.FooterContainer {
-  background-color: black;
+.h4 {
+  color: grey;
+  padding-left: 1rem;
+}
+
+.h4:hover {
+  cursor: pointer;
+  color: white;
 }
 
 .color {
