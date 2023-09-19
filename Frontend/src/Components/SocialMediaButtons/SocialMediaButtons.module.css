@@ -1,0 +1,25 @@
+.IconContainerMain {
+  display: flex;
+  gap: 10px;
+  padding: 1rem 1rem;
+}
+
+.IconContainer {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(169, 169, 169, 0.5);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Icon {
+  color: black;
+}
+
+.IconContainer:hover {
+  cursor: pointer;
+  background-color: white;
+}

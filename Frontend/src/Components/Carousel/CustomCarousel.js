@@ -13,7 +13,7 @@ let imagePath = [
 const CustomCarousel = () => {
   return (
     <div style={{ position: "relative" }}>
-      <Carousel animation="slide" duration={700}>
+      <Carousel animation="slide" duration={700} indicators={false}>
         {imagePath.map((item) => (
           <CarouselImageConatainer imagePath={item} />
         ))}
