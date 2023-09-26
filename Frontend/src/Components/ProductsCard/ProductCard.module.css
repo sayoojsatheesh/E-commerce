@@ -1,0 +1,21 @@
+.ProductContainer {
+  max-width: 465px;
+  max-height: 650px;
+}
+
+.ProductImage {
+  max-width: 465px;
+  max-height: 465px;
+  object-fit: contain;
+}
+
+.title {
+  font-weight: bold;
+}
+.subTitle {
+    color: gray;
+}
+
+.subTitle,.title{
+    font-size: 13px;
+}

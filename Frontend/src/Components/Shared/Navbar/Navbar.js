@@ -10,6 +10,8 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { useMediaQuery, useTheme } from "@mui/material";
 // Custom Components //
 import SearchBar from "../../SearchBar/SearchBar";
+// Other //
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const theme = useTheme();
@@ -22,15 +24,16 @@ const Navbar = () => {
       }`}
     >
       <div>
-        <img
-          src={"/Images/logo.svg"}
-          className={classes.Logo}
-          alt="logo"
-        />
+        <img src={"/Images/logo.svg"} className={classes.Logo} alt="logo" />
       </div>
       {dontShowMenuIcon ? null : (
         <div className={classes.MiddleSection}>
-          <span className={classes.Catagories}>All</span>
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
+            to="/products/all"
+          >
+            <span className={classes.Catagories}>All</span>
+          </Link>
           <span className={classes.Catagories}>Men</span>
           <span className={classes.Catagories}>Women</span>
           <span className={classes.Catagories}>Kids</span>
