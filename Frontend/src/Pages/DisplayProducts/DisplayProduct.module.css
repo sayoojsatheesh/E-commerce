@@ -1,0 +1,12 @@
+.ProductDisplayContainer {
+  display: flex;
+}
+
+.filterContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5em;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+}

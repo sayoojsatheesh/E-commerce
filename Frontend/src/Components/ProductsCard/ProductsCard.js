@@ -1,37 +1,64 @@
+// CSS
 import classes from "./ProductCard.module.css";
+// React //
+import { useEffect, useState, forwardRef } from "react";
+import formatNumberWithSpaces from "../../Utilis/FormatPrice";
 
 const ProductsCard = (props) => {
-  console.log("DAta =", props.data);
-  // Convert the data array to a Uint8Array
-  const uint8Array = new Uint8Array(props.data?.products[0].image1.data);
+  const [imageUrl, setImageUrl] = useState(null);
 
-  // Create a blob from the Uint8Array
-  const blob = new Blob([uint8Array], {
-    type: props.data?.products[0].image1.ype,
-  });
+  // Covert Image buffer to Image //
+  const loadImageAsync = async () => {
+    if (props.data?.image1?.data) {
+      const uint8Array = new Uint8Array(props.data.image1.data);
+      const blob = new Blob([uint8Array], {
+        type: props.data.image1.type,
+      });
+      const imageUrl = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          resolve(reader.result);
+        };
+        reader.readAsDataURL(blob);
+      });
+      return imageUrl;
+    }
+    return null;
+  };
 
-  // Create a data URL from the blob
-  const imageUrl = URL.createObjectURL(blob);
+  useEffect(() => {
+    const loadImage = async () => {
+      const url = await loadImageAsync();
+      setImageUrl(url);
+    };
+    loadImage();
+  }, [props.data]); // Run the effect whenever props.data changes
 
-  let availableColours = CountColor(props.data?.products[0].colour);
+  let availableColours = CountColor(props.data?.colour);
   let colourText = availableColours > 1 ? "Colours" : "Colour";
-  console.log(typeof(props.data?.products[0].price))
-  let prices = props.data?.products[0].price
-    ? JSON.parse(props.data?.products[0].price)
-    : null;
+  let currentPrice = formatNumberWithSpaces(props.data?.price.CurrentPrice);
+
   // Function Calculates the colors available//
   function CountColor(colors) {
     return colors?.split("/").length;
   }
   return (
     <div className={classes.ProductContainer}>
-      <img src={imageUrl} alt="ProductImage" className={classes.ProductImage} />
-      <div className={classes.title}>{props.data?.products[0].title}</div>
-      <div className={classes.subTitle}>{props.data?.products[0].subTitle}</div>
-      <div className={classes.subTitle}>
-        {availableColours} {colourText}
-      </div>
-      <div className={classes.title}>MRP : {prices?.CurrentPrice}</div>
+      <img
+        src={imageUrl ? imageUrl : "/Images/WhiteScreen.avif"}
+        alt="ProductImage"
+        className={classes.ProductImage}
+      />
+      {imageUrl ? (
+        <div className={classes.ProductInfo}>
+          <div className={classes.title}>{props.data?.title}</div>
+          <div className={classes.subTitle}>{props.data?.subTitle}</div>
+          <div className={classes.subTitle}>
+            {availableColours} {colourText}
+          </div>
+          <div className={classes.title}>MRP : ₹ {currentPrice}</div>
+        </div>
+      ) : null}
     </div>
   );
 };

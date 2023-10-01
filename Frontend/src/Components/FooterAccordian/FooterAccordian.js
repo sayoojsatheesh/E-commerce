@@ -23,7 +23,7 @@ const FooterAccordian = (props) => {
       </AccordionSummary>
       <AccordionDetails>
         {props.textArray.map((item) => (
-          <h6>{item}</h6>
+          <h6 key={Math.random()}>{item}</h6>
         ))}
       </AccordionDetails>
     </Accordion>

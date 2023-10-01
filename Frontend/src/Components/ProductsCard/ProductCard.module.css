@@ -4,8 +4,8 @@
 }
 
 .ProductImage {
-  max-width: 465px;
-  max-height: 465px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
@@ -13,9 +13,16 @@
   font-weight: bold;
 }
 .subTitle {
-    color: gray;
+  color: gray;
 }
 
-.subTitle,.title{
-    font-size: 13px;
+.subTitle,
+.title {
+  font-size: 13px;
+}
+
+.ProductInfo{
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
 }
