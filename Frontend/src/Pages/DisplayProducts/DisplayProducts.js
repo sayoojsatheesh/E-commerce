@@ -1,15 +1,20 @@
-// React //
+// React imports
+import React from "react";
 import { useState } from "react";
-// Custom//
+
+// Custom component imports
 import ProductsCard from "../../Components/ProductsCard/ProductsCard";
 import API_BASE_URL from "../../Utilis/apiConfig";
 import LoadingSkeleton from "../../Components/LoadingSkelton/LoadingSkelton";
-// MUI //
+
+// Material-UI imports
 import { Grid, useTheme, useMediaQuery, Box, Button } from "@mui/material";
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
-// CSS //
+
+// CSS import
 import classes from "./DisplayProduct.module.css";
-// Other //
+
+// Other imports
 import { useInfiniteQuery } from "react-query";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -19,32 +24,30 @@ const DisplayProducts = () => {
   const mediumScreen = useMediaQuery(theme.breakpoints.up("md"));
 
   const {
-    data,
-    isSuccess,
-    hasNextPage,
     fetchNextPage,
+    hasNextPage,
     isFetchingNextPage,
+    data,
+    status,
     error,
-    isLoading,
   } = useInfiniteQuery({
     queryKey: ["products"],
-    queryFn: ({ offSet = 0 }) => {
-      return fetchData(offSet);
+    queryFn: ({ offset = 0 }) => {
+      return fetchData(offset);
     },
     getNextPageParam: (prevData) => {
+      console.log("Calculating next offset from:", prevData);
       return prevData + 9;
     },
-    retry: 1,
+    retry: 0,
     staleTime: Infinity,
   });
 
-  // Function is used to fetch Product data (12)//
   async function fetchData(offset = 0) {
-    console.log("hy");
-    const response = await axios.get(`${API_BASE_URL}/items?offset=${offset}`); // Replace with your API endpoint
+    const response = await axios.get(`${API_BASE_URL}/items?offset=${offset}`);
     return { ...response.data, previousOffset: offset };
   }
-  console.log("Data =", data);
+
   return (
     <>
       {data ? (
@@ -64,40 +67,7 @@ const DisplayProducts = () => {
         <Box sx={{ width: "100%", height: "60.5px" }}></Box>
       )}
       <div className={classes.ProductDisplayContainer}>
-        <Box></Box>
-
-        <InfiniteScroll
-          dataLength={10}
-          next={() => fetchNextPage()}
-          hasMore={hasNextPage}
-          loader={<LoadingSkeleton mediumScreen={mediumScreen} />}
-        >
-          <Grid
-            container
-            spacing={1}
-            rowSpacing={2}
-            sx={{
-              paddingLeft: mediumScreen ? "1.5em" : "",
-              paddingRight: mediumScreen ? "1.5em" : "",
-            }}
-          >
-            {!isLoading ? (
-              data.pages[0]?.products?.map((item, i) => {
-                return (
-                  <Grid key={Math.random()} item xs={6} md={4}>
-                    <ProductsCard
-                      data={item}
-                      error={error}
-                      isLoading={isLoading}
-                    />
-                  </Grid>
-                );
-              })
-            ) : (
-              <LoadingSkeleton mediumScreen={mediumScreen} />
-            )}
-          </Grid>
-        </InfiniteScroll>
+        
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 // CSS
 import classes from "./ProductCard.module.css";
 // React //
-import { useEffect, useState, forwardRef } from "react";
+import { useEffect, useState } from "react";
 import formatNumberWithSpaces from "../../Utilis/FormatPrice";
 
 const ProductsCard = (props) => {
