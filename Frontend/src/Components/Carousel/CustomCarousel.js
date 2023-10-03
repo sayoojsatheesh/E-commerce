@@ -5,9 +5,9 @@ import CarouselImageConatainer from "../CarouselImageContainer/CarouselImageCont
 
 // Image Path Array //
 let imagePath = [
-  "/Images/slide-1.png",
-  "/Images/slide-2.png",
-  "/Images/slide-3.png",
+  { id: 1, img: "/Images/slide-1.png" },
+  { id: 2, img: "/Images/slide-2.png" },
+  { id: 3, img: "/Images/slide-3.png" },
 ];
 
 const CustomCarousel = () => {
@@ -15,7 +15,7 @@ const CustomCarousel = () => {
     <div style={{ position: "relative" }}>
       <Carousel animation="slide" duration={700} indicators={false}>
         {imagePath.map((item) => (
-          <CarouselImageConatainer imagePath={item} />
+          <CarouselImageConatainer key={item.id} imagePath={item.img} />
         ))}
       </Carousel>
     </div>
