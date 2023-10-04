@@ -1,9 +1,8 @@
 // React //
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // MUI //
 import { Grid, useTheme, useMediaQuery, Box, Button } from "@mui/material";
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
-import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 // Custom //
 import API_BASE_URL from "../../Utilis/apiConfig";
 import LoadingSkeleton from "../../Components/LoadingSkelton/LoadingSkelton";
@@ -18,11 +17,12 @@ import { useInfiniteQuery } from "react-query";
 const DisplayProducts = () => {
   const [showFilters, setshowFilters] = useState(false);
   const [sortBy, setsortBy] = useState("");
+  const [filters, setfilters] = useState({});
 
   const theme = useTheme();
   const mediumScreen = useMediaQuery(theme.breakpoints.up("md"));
-
-  const { fetchNextPage, hasNextPage, data } = useInfiniteQuery(
+  console.log(filters);
+  const { fetchNextPage, hasNextPage, data, refetch } = useInfiniteQuery(
     ["products"],
     ({ pageParam }) => fetchData(pageParam),
     {
@@ -38,11 +38,21 @@ const DisplayProducts = () => {
     }
   );
 
+  // Refetch data when filter changes //
+  useEffect(() => {
+    if (filters) {
+      refetch();
+    }
+  }, [filters]);
+
   // Get Products data //
   async function fetchData(offset = 0) {
+    const filtersQueryString = new URLSearchParams(filters).toString();
+    console.log("filtersQueryString =", filtersQueryString, filters);
     try {
       const response = await axios.get(
-        `${API_BASE_URL}/items?offset=${offset}`
+        `${API_BASE_URL}/items?offset=${offset}`,
+        { params: { filters } }
       );
       return { ...response.data, previousOffset: offset };
     } catch (error) {
@@ -86,7 +96,13 @@ const DisplayProducts = () => {
             >
               {showFilters ? "Hide Filter" : "Show Filter"}
             </Button>
-            <SortByDropDown sortBy={sortBy} setsortBy={setsortBy} />
+            <SortByDropDown
+              setfilters={setfilters}
+              sortBy={sortBy}
+              setsortBy={setsortBy}
+              refetch={refetch}
+              filters={filters}
+            />
           </Box>
         </Box>
       ) : (
@@ -109,9 +125,10 @@ const DisplayProducts = () => {
                 width: "100vw",
               }}
               spacing={2}
+              alignItems="stretch"
             >
               {flattenData.map((item) => (
-                <Grid item key={item.id} xs={6} md={4}>
+                <Grid item key={item._id} xs={6} md={4}>
                   <ProductsCard data={item} />
                 </Grid>
               ))}
