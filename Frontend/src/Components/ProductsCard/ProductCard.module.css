@@ -1,7 +1,24 @@
 .ProductContainer {
   max-width: 465px;
   max-height: 650px;
+  position: relative;
+  cursor: pointer;
 }
+
+.TransparentBackground::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(112, 112, 112, 0.2); /* Semi-transparent grey background */
+  border-radius: 10px;
+  pointer-events: none;
+  cursor: not-allowed;
+  z-index: 12;
+}
+
 
 .ProductImage {
   width: 100%;

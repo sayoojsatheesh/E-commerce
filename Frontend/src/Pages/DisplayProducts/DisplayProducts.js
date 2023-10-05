@@ -10,6 +10,7 @@ import ProductsCard from "../../Components/ProductsCard/ProductsCard";
 import classes from "./DisplayProduct.module.css";
 import SortByDropDown from "../../Components/SortByDropDown/SortByDropDown";
 import SideFilter from "../../Components/SideFilter/SideFilter";
+import BottomFilter from "../../Components/BottomFilter/BottomFilter";
 // Other //
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -21,6 +22,7 @@ const DisplayProducts = () => {
   const [showFilters, setshowFilters] = useState(false);
   const [sortBy, setsortBy] = useState("");
   const [filters, setfilters] = useState({});
+  const [openBottomFilter, setopenBottomFilter] = useState(false);
 
   const theme = useTheme();
   const mediumScreen = useMediaQuery(theme.breakpoints.up("md"));
@@ -32,12 +34,8 @@ const DisplayProducts = () => {
   const pathSegments = currentPath.split("/");
   const endingPath = pathSegments[pathSegments.length - 1];
 
-  console.log(endingPath);
-
-  const { fetchNextPage, hasNextPage, data, refetch } = useInfiniteQuery(
-    ["products"],
-    ({ pageParam }) => fetchData(pageParam),
-    {
+  const { fetchNextPage, hasNextPage, data, refetch, isFetching } =
+    useInfiniteQuery(["products"], ({ pageParam }) => fetchData(pageParam), {
       getNextPageParam: (lastPage) => {
         // Use the offset returned from the backend response for the next page
         if (lastPage.offset > 25) {
@@ -47,8 +45,7 @@ const DisplayProducts = () => {
       },
       retry: 0,
       staleTime: Infinity,
-    }
-  );
+    });
 
   // Refetch data when filter changes //
   useEffect(() => {
@@ -60,12 +57,12 @@ const DisplayProducts = () => {
   // Get Products data //
   async function fetchData(offset = 0) {
     const filtersQueryString = new URLSearchParams(filters).toString();
-    console.log("filtersQueryString =", filtersQueryString, filters);
     try {
       const response = await axios.get(
         `${API_BASE_URL}/items?offset=${offset}`,
         { params: { filters } }
       );
+
       return { ...response.data, previousOffset: offset };
     } catch (error) {
       console.error("Error in fetchData =", error);
@@ -82,6 +79,13 @@ const DisplayProducts = () => {
   function handleShowFilters() {
     setshowFilters((prevState) => !prevState);
   }
+
+  let FilterComponent = (
+    <BottomFilter
+      openBottomFilter={showFilters}
+      setopenBottomFilter={setshowFilters}
+    />
+  );
 
   return (
     <>
@@ -108,20 +112,22 @@ const DisplayProducts = () => {
             >
               {showFilters ? "Hide Filter" : "Show Filter"}
             </Button>
-            <SortByDropDown
-              setfilters={setfilters}
-              sortBy={sortBy}
-              setsortBy={setsortBy}
-              refetch={refetch}
-              filters={filters}
-            />
+            {mediumScreen ? (
+              <SortByDropDown
+                setfilters={setfilters}
+                sortBy={sortBy}
+                setsortBy={setsortBy}
+                refetch={refetch}
+                filters={filters}
+              />
+            ) : null}
           </Box>
         </Box>
       ) : (
         <Box sx={{ width: "100%", height: "60.5px" }}></Box>
       )}
       <div className={classes.ProductDisplayContainer}>
-        {showFilters ? <SideFilter /> : null}
+        {showFilters ? FilterComponent : null}
         {data ? (
           <InfiniteScroll
             dataLength={flattenData.length}
@@ -139,13 +145,8 @@ const DisplayProducts = () => {
               spacing={2}
             >
               {flattenData.map((item) => (
-                <Grid
-                  item
-                  key={item._id}
-                  xs={6}
-                  md={4}
-                >
-                  <ProductsCard data={item} />
+                <Grid item key={item._id} xs={6} md={4}>
+                  <ProductsCard isFetching={isFetching} data={item} />
                 </Grid>
               ))}
             </Grid>

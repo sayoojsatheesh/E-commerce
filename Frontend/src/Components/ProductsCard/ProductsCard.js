@@ -43,7 +43,11 @@ const ProductsCard = (props) => {
     return colors?.split("/").length;
   }
   return (
-    <div className={classes.ProductContainer}>
+    <div
+      className={`${classes.ProductContainer} ${
+        props.isFetching ? classes.TransparentBackground : null
+      }`}
+    >
       <img
         src={imageUrl ? imageUrl : "/Images/WhiteScreen.avif"}
         alt="ProductImage"
