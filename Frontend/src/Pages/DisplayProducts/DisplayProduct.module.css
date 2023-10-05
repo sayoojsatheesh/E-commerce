@@ -1,6 +1,6 @@
 .ProductDisplayContainer {
   display: flex;
-  margin-bottom: 1rem;
+  transition: width 3s ease, height 3s ease;
 }
 
 .filterContainer {

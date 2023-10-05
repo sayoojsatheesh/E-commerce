@@ -6,8 +6,7 @@
 .ProductImage {
   width: 100%;
   height: 100%;
-  min-height: 372.06px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .title {
@@ -22,8 +21,29 @@
   font-size: 13px;
 }
 
-.ProductInfo{
+.ProductInfo {
   display: flex;
   flex-direction: column;
   row-gap: 4px;
 }
+
+/* @media screen and (min-width: 961px) {
+  .ProductImage {
+    min-height: 581.25px;
+    object-fit: cover;
+  }
+}
+
+@media screen and (min-width: 0px) {
+  .ProductImage {
+    min-height: 223.75px;
+    object-fit: cover;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .ProductImage {
+    min-height: 460px;
+    object-fit: cover;
+  }
+} */

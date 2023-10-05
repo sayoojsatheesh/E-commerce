@@ -9,10 +9,13 @@ import LoadingSkeleton from "../../Components/LoadingSkelton/LoadingSkelton";
 import ProductsCard from "../../Components/ProductsCard/ProductsCard";
 import classes from "./DisplayProduct.module.css";
 import SortByDropDown from "../../Components/SortByDropDown/SortByDropDown";
+import SideFilter from "../../Components/SideFilter/SideFilter";
 // Other //
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useInfiniteQuery } from "react-query";
+import { useLocation } from "react-router-dom";
+import "animate.css";
 
 const DisplayProducts = () => {
   const [showFilters, setshowFilters] = useState(false);
@@ -21,7 +24,16 @@ const DisplayProducts = () => {
 
   const theme = useTheme();
   const mediumScreen = useMediaQuery(theme.breakpoints.up("md"));
-  console.log(filters);
+
+  // Access the current path from the URL
+  const location = useLocation();
+  const currentPath = location.pathname;
+  // Extract the ending part of the path (last segment)
+  const pathSegments = currentPath.split("/");
+  const endingPath = pathSegments[pathSegments.length - 1];
+
+  console.log(endingPath);
+
   const { fetchNextPage, hasNextPage, data, refetch } = useInfiniteQuery(
     ["products"],
     ({ pageParam }) => fetchData(pageParam),
@@ -109,7 +121,7 @@ const DisplayProducts = () => {
         <Box sx={{ width: "100%", height: "60.5px" }}></Box>
       )}
       <div className={classes.ProductDisplayContainer}>
-        {showFilters ? <Box>hy</Box> : null}
+        {showFilters ? <SideFilter /> : null}
         {data ? (
           <InfiniteScroll
             dataLength={flattenData.length}
@@ -122,13 +134,17 @@ const DisplayProducts = () => {
               sx={{
                 paddingLeft: mediumScreen ? "1.5em" : "",
                 paddingRight: mediumScreen ? "1.5em" : "",
-                width: "100vw",
+                width: "100%",
               }}
               spacing={2}
-              alignItems="stretch"
             >
               {flattenData.map((item) => (
-                <Grid item key={item._id} xs={6} md={4}>
+                <Grid
+                  item
+                  key={item._id}
+                  xs={6}
+                  md={4}
+                >
                   <ProductsCard data={item} />
                 </Grid>
               ))}

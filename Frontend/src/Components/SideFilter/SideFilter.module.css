@@ -1,0 +1,6 @@
+.FilterContainer {
+  width: 240px;
+  background-color: aqua;
+  transition: all 0.3s ease-in-out;
+
+}
