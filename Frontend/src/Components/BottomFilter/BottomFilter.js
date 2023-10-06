@@ -8,27 +8,20 @@ import {
   RadioGroup,
   FormControlLabel,
   FormControl,
-  FormLabel,
   Checkbox,
   FormGroup,
+  Slider,
 } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { styled } from "@mui/material/styles";
 
 // CSS //
 import classes from "./BottomFiler.module.css";
-
-const CustomCheckbox = styled(Checkbox)({
-  "&.Mui-checked": {
-    color: "black", // Specify your desired checked checkbox color
-  },
-});
-
-const CustomRadio = styled(Radio)({
-  "&.Mui-checked": {
-    color: "black", // Specify your desired checked checkbox color
-  },
-});
+// Custom//
+import Filters from "../Shared/Filters/Filters";
+import GenderSelector from "../Shared/GenderSelector/GenderSelector";
+import PriceRangeSlider from "../Shared/PriceRangeSlider/PriceRangeSlider";
+import ColourPicker from "../Shared/ColourPicker/ColourPicker";
 
 const BottomFilter = ({
   openBottomFilter,
@@ -37,6 +30,8 @@ const BottomFilter = ({
   setsortBy,
   setgenders,
   genders,
+  priceRange,
+  setpriceRange,
 }) => {
   const toggleDrawer = (open) => (event) => {
     if (
@@ -47,17 +42,6 @@ const BottomFilter = ({
     }
     setopenBottomFilter(open);
   };
-
-  // Control SortBy Change //
-  const handleSortBy = (event) => {
-    setsortBy(event.target.value);
-  };
-
-  function handleChekbox(key) {
-    
-  }
-
-  console.log(genders);
 
   return (
     <>
@@ -81,71 +65,13 @@ const BottomFilter = ({
               fontSize="large"
             />
           </Box>
-          <h3>Filters</h3>
-          <Box className={classes.SortByContainer}>
-            <h3>Sort By</h3>
-            <Box>
-              <FormControl
-                onClick={(event) => {
-                  handleSortBy(event);
-                }}
-              >
-                <RadioGroup
-                  aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue="female"
-                  name="radio-buttons-group"
-                  value={sortBy}
-                >
-                  <FormControlLabel
-                    value="Price: High-Low"
-                    control={<CustomRadio />}
-                    label="Price: High-Low"
-                  />
-                  <FormControlLabel
-                    value="Price: Low-High"
-                    control={<CustomRadio />}
-                    label="Price: Low-High"
-                  />
-                </RadioGroup>
-              </FormControl>
-            </Box>
-          </Box>
-          <Box>
-            <h3>Gender</h3>
-            <Box>
-              <FormGroup>
-                <FormControlLabel
-                  control={<CustomCheckbox checked={genders.Men} />}
-                  label="Men"
-                  onChange={() => {
-                    handleChekbox("Men");
-                  }}
-                />
-                <FormControlLabel
-                  control={
-                    <CustomCheckbox
-                      checked={genders.Female}
-                      onChange={() => {
-                        handleChekbox("Female");
-                      }}
-                    />
-                  }
-                  label="Female"
-                />
-                <FormControlLabel
-                  control={
-                    <CustomCheckbox
-                      checked={genders.Kids}
-                      onChange={() => {
-                        handleChekbox("Kids");
-                      }}
-                    />
-                  }
-                  label="Kids"
-                />
-              </FormGroup>
-            </Box>
-          </Box>
+          <Filters setsortBy={setsortBy} sortBy={sortBy} />
+          <GenderSelector genders={genders} setgenders={setgenders} />
+          <PriceRangeSlider
+            priceRange={priceRange}
+            setpriceRange={setpriceRange}
+          />
+          <ColourPicker />
         </Box>
       </Drawer>
     </>

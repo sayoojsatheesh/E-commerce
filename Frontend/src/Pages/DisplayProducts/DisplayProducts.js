@@ -23,7 +23,12 @@ const DisplayProducts = () => {
   const [sortBy, setsortBy] = useState("");
   const [filters, setfilters] = useState({});
   const [openBottomFilter, setopenBottomFilter] = useState(false);
-  const [genders, setgenders] = useState({});
+  const [genders, setgenders] = useState({
+    Men: false,
+    Female: false,
+    Kids: false,
+  });
+  const [priceRange, setpriceRange] = useState([0, 30000]);
 
   const theme = useTheme();
   const mediumScreen = useMediaQuery(theme.breakpoints.up("md"));
@@ -89,6 +94,8 @@ const DisplayProducts = () => {
       sortBy={sortBy}
       genders={genders}
       setgenders={setgenders}
+      priceRange={priceRange}
+      setpriceRange={setpriceRange}
     />
   );
 
