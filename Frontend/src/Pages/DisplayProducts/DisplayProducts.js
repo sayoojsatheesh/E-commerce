@@ -23,6 +23,7 @@ const DisplayProducts = () => {
   const [sortBy, setsortBy] = useState("");
   const [filters, setfilters] = useState({});
   const [openBottomFilter, setopenBottomFilter] = useState(false);
+  const [genders, setgenders] = useState({});
 
   const theme = useTheme();
   const mediumScreen = useMediaQuery(theme.breakpoints.up("md"));
@@ -84,6 +85,10 @@ const DisplayProducts = () => {
     <BottomFilter
       openBottomFilter={showFilters}
       setopenBottomFilter={setshowFilters}
+      setsortBy={setsortBy}
+      sortBy={sortBy}
+      genders={genders}
+      setgenders={setgenders}
     />
   );
 
