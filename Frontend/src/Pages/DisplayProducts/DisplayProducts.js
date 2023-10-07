@@ -28,6 +28,7 @@ const DisplayProducts = () => {
     Female: false,
     Kids: false,
   });
+  const [colours, setcolours] = useState([]);
   const [priceRange, setpriceRange] = useState([0, 30000]);
 
   const theme = useTheme();
@@ -96,8 +97,12 @@ const DisplayProducts = () => {
       setgenders={setgenders}
       priceRange={priceRange}
       setpriceRange={setpriceRange}
+      setcolours={setcolours}
+      colours={colours}
     />
   );
+
+  console.log(" colours =", colours);
 
   return (
     <>

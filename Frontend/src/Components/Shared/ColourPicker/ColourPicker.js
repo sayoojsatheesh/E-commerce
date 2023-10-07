@@ -1,40 +1,78 @@
+// CSS //
+import classes from "./ColourPicker.module.css";
 // MUI //
 import { Box } from "@mui/material";
 // Custom //
 import SingleColour from "../../SingleColour/SingleColour";
-const ColourPicker = () => {
+const ColourPicker = ({ setcolours, colours }) => {
+  let coloursCount = colours.length == 0 ? "" : `(${colours.length})`;
   return (
     <Box>
-      <h3>Colours</h3>
+      <h3>Colours {coloursCount}</h3>
       <Box>
-        <Box
-          sx={{
-            display: "flex",
-          }}
-        >
-          <SingleColour />
-          <SingleColour />
-          <SingleColour />
+        <Box className={classes.ColourContainer}>
+          <SingleColour
+            setcolours={setcolours}
+            colours={colours}
+            colour={"Black"}
+          />
+          <SingleColour
+            setcolours={setcolours}
+            colours={colours}
+            colour={"Red"}
+          />
+          <SingleColour
+            setcolours={setcolours}
+            colours={colours}
+            colour={"Pink"}
+          />
         </Box>
-        <Box sx={{ display: "flex", justifyContent: "space-evenly" }}>
-          <SingleColour />
-          <SingleColour />
-          <SingleColour />
+        <Box className={classes.ColourContainer}>
+          <SingleColour
+            setcolours={setcolours}
+            colours={colours}
+            colour={"Gray"}
+          />
+          <SingleColour
+            setcolours={setcolours}
+            colours={colours}
+            colour={"Green"}
+          />
+          <SingleColour
+            setcolours={setcolours}
+            colours={colours}
+            colour={"Blue"}
+          />
         </Box>
-        <Box sx={{ display: "flex", justifyContent: "space-evenly" }}>
-          <SingleColour />
-          <SingleColour />
-          <SingleColour />
+        <Box className={classes.ColourContainer}>
+          <SingleColour
+            setcolours={setcolours}
+            colours={colours}
+            colour={"White"}
+            border={true}
+          />
+          <SingleColour
+            setcolours={setcolours}
+            colours={colours}
+            colour={"Multi"}
+          />
+          <SingleColour
+            setcolours={setcolours}
+            colours={colours}
+            colour={"Brown"}
+          />
         </Box>
-        <Box sx={{
-            display: "flex",
-            backgroundColor: "grey",
-            width: "70%",
-            margin: "0 auto",
-            justifyContent:'space-between'
-          }}>
-          <SingleColour />
-          <SingleColour />
+        <Box className={classes.ColourContainer}>
+          <SingleColour
+            setcolours={setcolours}
+            colours={colours}
+            colour={"Yellow"}
+          />
+          <SingleColour
+            setcolours={setcolours}
+            colours={colours}
+            colour={"Purple"}
+          />
         </Box>
       </Box>
     </Box>

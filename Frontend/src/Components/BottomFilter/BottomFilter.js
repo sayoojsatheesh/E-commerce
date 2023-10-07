@@ -32,6 +32,8 @@ const BottomFilter = ({
   genders,
   priceRange,
   setpriceRange,
+  colours,
+  setcolours
 }) => {
   const toggleDrawer = (open) => (event) => {
     if (
@@ -71,7 +73,7 @@ const BottomFilter = ({
             priceRange={priceRange}
             setpriceRange={setpriceRange}
           />
-          <ColourPicker />
+          <ColourPicker setcolours={setcolours} colours={colours} />
         </Box>
       </Drawer>
     </>
