@@ -1,19 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 // MUI //
-import {
-  Drawer,
-  Box,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormControl,
-  Checkbox,
-  FormGroup,
-  Slider,
-} from "@mui/material";
+import { Drawer, Box } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { styled } from "@mui/material/styles";
 
 // CSS //
 import classes from "./BottomFiler.module.css";
@@ -33,7 +22,8 @@ const BottomFilter = ({
   priceRange,
   setpriceRange,
   colours,
-  setcolours
+  setcolours,
+  endingPath,
 }) => {
   const toggleDrawer = (open) => (event) => {
     if (
@@ -67,8 +57,12 @@ const BottomFilter = ({
               fontSize="large"
             />
           </Box>
+          <h3>Filters</h3>
+          <h3>Sort By</h3>
           <Filters setsortBy={setsortBy} sortBy={sortBy} />
-          <GenderSelector genders={genders} setgenders={setgenders} />
+          {endingPath == "all" ? (
+            <GenderSelector genders={genders} setgenders={setgenders} />
+          ) : null}
           <PriceRangeSlider
             priceRange={priceRange}
             setpriceRange={setpriceRange}

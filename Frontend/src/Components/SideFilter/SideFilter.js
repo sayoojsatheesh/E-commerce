@@ -1,3 +1,5 @@
+// React //
+import { useState } from "react";
 // CSS //
 import classes from "./SideFilter.module.css";
 // MUI //
@@ -7,26 +9,52 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+// Custom //
+import Filters from "../Shared/Filters/Filters";
 
-const SideFilter = () => {
+const styles = {
+  accordion: {
+    marginBottom: "0px", // You can adjust the margin value as per your preference
+  },
+};
+
+const SideFilter = ({
+  openBottomFilter,
+  setopenBottomFilter,
+  sortBy,
+  setsortBy,
+  setgenders,
+  genders,
+  priceRange,
+  setpriceRange,
+  colours,
+  setcolours,
+  endingPath,
+}) => {
+  const [sortByExpand, setsortByExpand] = useState(true);
   return (
     <div className={classes.FilterContainer}>
-      <Accordion>
+      <Accordion
+        expanded={sortByExpand}
+        style={styles.accordion}
+        onChange={() => {
+          setsortByExpand((prevState) => {
+            return !prevState;
+          });
+        }}
+      >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>Accordion 1</Typography>
+          <Typography sx={{fontWeight:'bold'}}>Sort By</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+          <Filters setsortBy={setsortBy} sortBy={sortBy} />
         </AccordionDetails>
       </Accordion>
-      <Accordion>
+      <Accordion style={styles.accordion}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
@@ -41,7 +69,7 @@ const SideFilter = () => {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion disabled>
+      <Accordion style={styles.accordion}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3a-content"

@@ -9,8 +9,8 @@ import LoadingSkeleton from "../../Components/LoadingSkelton/LoadingSkelton";
 import ProductsCard from "../../Components/ProductsCard/ProductsCard";
 import classes from "./DisplayProduct.module.css";
 import SortByDropDown from "../../Components/SortByDropDown/SortByDropDown";
-import SideFilter from "../../Components/SideFilter/SideFilter";
 import BottomFilter from "../../Components/BottomFilter/BottomFilter";
+import SideFilter from "../../Components/SideFilter/SideFilter";
 // Other //
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -87,7 +87,21 @@ const DisplayProducts = () => {
     setshowFilters((prevState) => !prevState);
   }
 
-  let FilterComponent = (
+  let FilterComponent = mediumScreen ? (
+    <SideFilter
+      openBottomFilter={showFilters}
+      setopenBottomFilter={setshowFilters}
+      setsortBy={setsortBy}
+      sortBy={sortBy}
+      genders={genders}
+      setgenders={setgenders}
+      priceRange={priceRange}
+      setpriceRange={setpriceRange}
+      setcolours={setcolours}
+      colours={colours}
+      endingPath={endingPath}
+    />
+  ) : (
     <BottomFilter
       openBottomFilter={showFilters}
       setopenBottomFilter={setshowFilters}
@@ -99,6 +113,7 @@ const DisplayProducts = () => {
       setpriceRange={setpriceRange}
       setcolours={setcolours}
       colours={colours}
+      endingPath={endingPath}
     />
   );
 

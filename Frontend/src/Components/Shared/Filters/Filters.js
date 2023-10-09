@@ -23,9 +23,8 @@ const Filters = ({ sortBy, setsortBy }) => {
   };
   return (
     <>
-      <h3>Filters</h3>
       <Box className={classes.SortByContainer}>
-        <h3>Sort By</h3>
+        
         <Box>
           <FormControl
             onClick={(event) => {

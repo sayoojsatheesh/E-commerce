@@ -1,8 +1,5 @@
 // MUI //
-import {
-  Box,
-  Slider,
-} from "@mui/material";
+import { Box, Slider } from "@mui/material";
 // CSS //
 import classes from "./PriceRangeSlider.module.css";
 
@@ -15,7 +12,7 @@ const PriceRangeSlider = ({ priceRange, setpriceRange }) => {
   return (
     <Box>
       <h3>Shop By Price</h3>
-      <Box>
+      <Box sx={{ padding: ".2rem .5rem" }}>
         <Slider
           getAriaLabel={() => "Temperature range"}
           value={priceRange}
@@ -27,7 +24,9 @@ const PriceRangeSlider = ({ priceRange, setpriceRange }) => {
           valueLabelFormat={(value) => `${value}`}
         />
         <div className={classes.PriceRangeContainer}>
-          Selected Price Range: {priceRange[0]} - {priceRange[1]}
+          Selected Price Range:
+          <span className={classes.PriceSelected}> {priceRange[0]}</span> -
+          <span className={classes.PriceSelected}>{priceRange[1]}</span>
         </div>
       </Box>
     </Box>
