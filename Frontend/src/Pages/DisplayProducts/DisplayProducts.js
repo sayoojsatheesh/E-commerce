@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 // MUI //
 import { Grid, useTheme, useMediaQuery, Box, Button } from "@mui/material";
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
+import { styled} from '@mui/material/styles';
 // Custom //
 import API_BASE_URL from "../../Utilis/apiConfig";
 import LoadingSkeleton from "../../Components/LoadingSkelton/LoadingSkelton";
@@ -18,11 +19,41 @@ import { useInfiniteQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import "animate.css";
 
+const drawerWidth = 240;
+
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
+  ({ theme, open }) => ({
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: `-${drawerWidth}px`,
+    ...(open && {
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      marginLeft: 0,
+    }),
+  }),
+);
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+  justifyContent: 'flex-end',
+}));
+
+
 const DisplayProducts = () => {
   const [showFilters, setshowFilters] = useState(false);
   const [sortBy, setsortBy] = useState("");
   const [filters, setfilters] = useState({});
-  const [openBottomFilter, setopenBottomFilter] = useState(false);
   const [genders, setgenders] = useState({
     Men: false,
     Female: false,
@@ -30,6 +61,7 @@ const DisplayProducts = () => {
   });
   const [colours, setcolours] = useState([]);
   const [priceRange, setpriceRange] = useState([0, 30000]);
+  const [open, setOpen] = React.useState(false);
 
   const theme = useTheme();
   const mediumScreen = useMediaQuery(theme.breakpoints.up("md"));
@@ -117,8 +149,6 @@ const DisplayProducts = () => {
     />
   );
 
-  console.log(" colours =", colours);
-
   return (
     <>
       {data ? (
@@ -159,7 +189,10 @@ const DisplayProducts = () => {
         <Box sx={{ width: "100%", height: "60.5px" }}></Box>
       )}
       <div className={classes.ProductDisplayContainer}>
+        <div className={classes.FilterComponent}>
         {showFilters ? FilterComponent : null}
+        </div>
+       
         {data ? (
           <InfiniteScroll
             dataLength={flattenData.length}

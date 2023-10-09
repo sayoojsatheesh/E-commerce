@@ -1,7 +1,8 @@
 .FilterContainer {
-  width: 800px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(231, 16, 16);
   transition: all 0.3s ease-in-out;
-  margin-left: .5rem;
-
+  margin-left: 0.5rem;
+ 
 }
+
+

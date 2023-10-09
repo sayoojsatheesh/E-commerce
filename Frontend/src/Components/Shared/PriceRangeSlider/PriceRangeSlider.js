@@ -11,7 +11,7 @@ const PriceRangeSlider = ({ priceRange, setpriceRange }) => {
 
   return (
     <Box>
-      <h3>Shop By Price</h3>
+    
       <Box sx={{ padding: ".2rem .5rem" }}>
         <Slider
           getAriaLabel={() => "Temperature range"}

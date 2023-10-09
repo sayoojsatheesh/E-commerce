@@ -11,6 +11,7 @@ import Filters from "../Shared/Filters/Filters";
 import GenderSelector from "../Shared/GenderSelector/GenderSelector";
 import PriceRangeSlider from "../Shared/PriceRangeSlider/PriceRangeSlider";
 import ColourPicker from "../Shared/ColourPicker/ColourPicker";
+import countTrueFalseKeys from "../../Utilis/GenderCount";
 
 const BottomFilter = ({
   openBottomFilter,
@@ -34,6 +35,10 @@ const BottomFilter = ({
     }
     setopenBottomFilter(open);
   };
+
+
+
+  let genderCount = countTrueFalseKeys(genders);
 
   return (
     <>
@@ -61,12 +66,17 @@ const BottomFilter = ({
           <h3>Sort By</h3>
           <Filters setsortBy={setsortBy} sortBy={sortBy} />
           {endingPath == "all" ? (
-            <GenderSelector genders={genders} setgenders={setgenders} />
+            <>
+              <h3>Gender {genderCount}</h3>
+              <GenderSelector genders={genders} setgenders={setgenders} />
+            </>
           ) : null}
+            <h3>Shop By Price</h3>
           <PriceRangeSlider
             priceRange={priceRange}
             setpriceRange={setpriceRange}
           />
+          
           <ColourPicker setcolours={setcolours} colours={colours} />
         </Box>
       </Drawer>

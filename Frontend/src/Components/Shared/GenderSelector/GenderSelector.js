@@ -30,25 +30,9 @@ const GenderSelector = ({ setgenders, genders }) => {
     });
   }
 
-  // Function helps to calculate the genders selected //
-  function countTrueFalseKeys(obj) {
-    let trueCount = 0;
-
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        if (obj[key] === true) {
-          trueCount++;
-        }
-      }
-    }
-
-    trueCount = trueCount == 0 ? "" : `(${trueCount})`;
-    return trueCount;
-  }
-  let genderCount = countTrueFalseKeys(genders);
   return (
     <Box>
-      <h3>Gender {genderCount}</h3>
+    
       <Box>
         <FormGroup>
           <FormControlLabel
