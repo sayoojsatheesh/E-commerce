@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 // MUI //
 import { Grid, useTheme, useMediaQuery, Box, Button } from "@mui/material";
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
-import { styled} from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 // Custom //
 import API_BASE_URL from "../../Utilis/apiConfig";
 import LoadingSkeleton from "../../Components/LoadingSkelton/LoadingSkelton";
@@ -21,34 +21,33 @@ import "animate.css";
 
 const drawerWidth = 240;
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
+const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
+    transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     marginLeft: `-${drawerWidth}px`,
     ...(open && {
-      transition: theme.transitions.create('margin', {
+      transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen,
       }),
       marginLeft: 0,
     }),
-  }),
+  })
 );
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
+  justifyContent: "flex-end",
 }));
-
 
 const DisplayProducts = () => {
   const [showFilters, setshowFilters] = useState(false);
@@ -149,6 +148,7 @@ const DisplayProducts = () => {
     />
   );
 
+
   return (
     <>
       {data ? (
@@ -190,9 +190,9 @@ const DisplayProducts = () => {
       )}
       <div className={classes.ProductDisplayContainer}>
         <div className={classes.FilterComponent}>
-        {showFilters ? FilterComponent : null}
+          {showFilters ? FilterComponent : null}
         </div>
-       
+
         {data ? (
           <InfiniteScroll
             dataLength={flattenData.length}

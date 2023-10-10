@@ -41,7 +41,7 @@ const BottomFilter = ({
   let genderCount = countTrueFalseKeys(genders);
 
   return (
-    <>
+    <Box sx={{width:'100%'}}>
       <Drawer
         transitionDuration={{ enter: 900, exit: 900 }}
         anchor="bottom"
@@ -80,7 +80,7 @@ const BottomFilter = ({
           <ColourPicker setcolours={setcolours} colours={colours} />
         </Box>
       </Drawer>
-    </>
+    </Box>
   );
 };
 

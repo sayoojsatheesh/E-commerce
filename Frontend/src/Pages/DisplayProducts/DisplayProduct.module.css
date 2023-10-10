@@ -2,9 +2,8 @@
   display: flex;
 }
 
-.FilterComponent{
-  position: sticky;
-  top: 0;
+.FilterComponent {
+  background-color: gray;
 }
 .filterContainer {
   display: flex;

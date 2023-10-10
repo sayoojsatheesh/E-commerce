@@ -2,7 +2,9 @@
   background-color: rgb(231, 16, 16);
   transition: all 0.3s ease-in-out;
   margin-left: 0.5rem;
- 
+  height: 900px;
+  width: 250px;
+  position: sticky;
+  top: 0px;
+  overflow-y: scroll;
 }
-
-
