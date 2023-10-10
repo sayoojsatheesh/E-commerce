@@ -36,12 +36,12 @@ const BottomFilter = ({
     setopenBottomFilter(open);
   };
 
-
+  let coloursCount = colours.length == 0 ? "" : `(${colours.length})`;
 
   let genderCount = countTrueFalseKeys(genders);
 
   return (
-    <Box sx={{width:'100%'}}>
+    <Box sx={{ width: "100%" }}>
       <Drawer
         transitionDuration={{ enter: 900, exit: 900 }}
         anchor="bottom"
@@ -71,12 +71,12 @@ const BottomFilter = ({
               <GenderSelector genders={genders} setgenders={setgenders} />
             </>
           ) : null}
-            <h3>Shop By Price</h3>
+          <h3>Shop By Price</h3>
           <PriceRangeSlider
             priceRange={priceRange}
             setpriceRange={setpriceRange}
           />
-          
+          <h3>Colours {coloursCount}</h3>
           <ColourPicker setcolours={setcolours} colours={colours} />
         </Box>
       </Drawer>

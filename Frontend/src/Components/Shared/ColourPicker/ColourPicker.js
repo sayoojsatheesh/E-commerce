@@ -5,10 +5,9 @@ import { Box } from "@mui/material";
 // Custom //
 import SingleColour from "../../SingleColour/SingleColour";
 const ColourPicker = ({ setcolours, colours }) => {
-  let coloursCount = colours.length == 0 ? "" : `(${colours.length})`;
+  
   return (
     <Box>
-      <h3>Colours {coloursCount}</h3>
       <Box>
         <Box className={classes.ColourContainer}>
           <SingleColour

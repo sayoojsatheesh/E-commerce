@@ -1,10 +1,30 @@
 .FilterContainer {
-  background-color: rgb(231, 16, 16);
+  background-color: #ffffff; /* White background */
   transition: all 0.3s ease-in-out;
   margin-left: 0.5rem;
-  height: 900px;
   width: 250px;
   position: sticky;
-  top: 0px;
-  overflow-y: scroll;
+  top: 128px;
+  overflow-y: auto;
+
+  max-height: 500px;
+
+  /* Custom scrollbar styles */
+  scrollbar-width: thin;
+  scrollbar-color: #000000 rgba(0, 0, 0, 0.3);
+
+  /* Webkit (Chrome, Safari, etc.) scrollbar styles */
+  &::-webkit-scrollbar {
+    width: 3px; /* Set the width of the scrollbar */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #000000; /* Set the color of the scrollbar thumb to black */
+    border-radius: 4px; /* Optional: Round the corners of the thumb */
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.3); /* Set the color of the scrollbar track */
+    background: transparent;
+  }
 }

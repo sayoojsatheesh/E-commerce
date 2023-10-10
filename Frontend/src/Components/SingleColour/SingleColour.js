@@ -47,6 +47,7 @@ const SingleColour = ({ colour, border, setcolours, colours }) => {
                 : `null`,
             backgroundColor: `${colour}`,
             border: `${border ? "1px solid gray" : null}`,
+            cursor: "pointer"
           }}
         ></Box>
         <Box>{colour}</Box>

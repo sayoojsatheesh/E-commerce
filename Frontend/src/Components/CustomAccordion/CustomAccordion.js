@@ -29,7 +29,7 @@ const CustomAccordion = ({ children, heading }) => {
         aria-controls="panel2a-content"
         id="panel2a-header"
       >
-        <Typography>{heading}</Typography>
+        <Typography sx={{fontWeight:'bold'}}>{heading}</Typography>
       </AccordionSummary>
       <AccordionDetails>{children}</AccordionDetails>
     </Accordion>

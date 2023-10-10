@@ -1,10 +1,9 @@
 .ProductDisplayContainer {
   display: flex;
+  margin-bottom: 1rem;
 }
 
-.FilterComponent {
-  background-color: gray;
-}
+
 .filterContainer {
   display: flex;
   justify-content: space-between;

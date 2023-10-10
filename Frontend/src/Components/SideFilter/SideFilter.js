@@ -17,6 +17,7 @@ const SideFilter = ({
   endingPath,
 }) => {
   let genderSelectedCount = countTrueFalseKeys(genders);
+  let coloursCount = colours.length == 0 ? "" : `(${colours.length})`;
 
   return (
     <div className={classes.FilterContainer}>
@@ -33,7 +34,7 @@ const SideFilter = ({
           setpriceRange={setpriceRange}
         />
       </CustomAccordion>
-      <CustomAccordion heading={"Colour Picker"}>
+      <CustomAccordion heading={`Colours ${coloursCount?coloursCount:''}`}>
         <ColourPicker setcolours={setcolours} colours={colours} />
       </CustomAccordion>
     </div>
