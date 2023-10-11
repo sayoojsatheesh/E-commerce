@@ -34,9 +34,24 @@ const Navbar = () => {
           >
             <span className={classes.Catagories}>All</span>
           </Link>
-          <span className={classes.Catagories}>Men</span>
-          <span className={classes.Catagories}>Women</span>
-          <span className={classes.Catagories}>Kids</span>
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
+            to="/products/men"
+          >
+            <span className={classes.Catagories}>Men</span>
+          </Link>
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
+            to="/products/women"
+          >
+            <span className={classes.Catagories}>Women</span>
+          </Link>
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
+            to="/products/kids"
+          >
+            <span className={classes.Catagories}>Kids</span>
+          </Link>
         </div>
       )}
       <div className={classes.IconContainer}>

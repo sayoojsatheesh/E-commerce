@@ -60,15 +60,20 @@ const DisplayProducts = () => {
     if (filters) {
       refetch();
     }
-  }, [filters]);
-
+  }, [filters, endingPath]);
+  console.log("colours =", colours);
   // Get Products data //
   async function fetchData(offset = 0) {
     const filtersQueryString = new URLSearchParams(filters).toString();
     try {
       const response = await axios.get(
         `${API_BASE_URL}/items?offset=${offset}`,
-        { params: { filters, path: endingPath } }
+        {
+          params: {
+            filterBy: { genders, priceRange, colours,sortBy },
+            path: endingPath,
+          },
+        }
       );
 
       return { ...response.data, previousOffset: offset };
@@ -166,7 +171,9 @@ const DisplayProducts = () => {
           <InfiniteScroll
             dataLength={flattenData.length}
             next={fetchNextPage}
-            hasMore={hasNextPage}
+            hasMore={
+              data?.pages[0]?.totalCount !== flattenData.length ? true : false
+            }
             loader={<div className={classes.Loader}>Loading More</div>}
           >
             <Grid

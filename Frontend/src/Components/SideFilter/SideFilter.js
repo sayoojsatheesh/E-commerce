@@ -21,20 +21,20 @@ const SideFilter = ({
 
   return (
     <div className={classes.FilterContainer}>
-      <CustomAccordion
-        heading={`Gender ${genderSelectedCount ? genderSelectedCount : ""}`}
-      >
-        {endingPath == "all" ? (
+      {endingPath == "all" ? (
+        <CustomAccordion
+          heading={`Gender ${genderSelectedCount ? genderSelectedCount : ""}`}
+        >
           <GenderSelector genders={genders} setgenders={setgenders} />
-        ) : null}
-      </CustomAccordion>
+        </CustomAccordion>
+      ) : null}
       <CustomAccordion heading={"Shop By Price"}>
         <PriceRangeSlider
           priceRange={priceRange}
           setpriceRange={setpriceRange}
         />
       </CustomAccordion>
-      <CustomAccordion heading={`Colours ${coloursCount?coloursCount:''}`}>
+      <CustomAccordion heading={`Colours ${coloursCount ? coloursCount : ""}`}>
         <ColourPicker setcolours={setcolours} colours={colours} />
       </CustomAccordion>
     </div>

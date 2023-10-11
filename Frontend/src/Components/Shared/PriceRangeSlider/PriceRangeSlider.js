@@ -13,6 +13,7 @@ const PriceRangeSlider = ({ priceRange, setpriceRange }) => {
     <Box>
       <Box sx={{ padding: ".2rem .5rem" }}>
         <Slider
+         size="small"
           getAriaLabel={() => "Temperature range"}
           value={priceRange}
           onChange={handlePriceChange}
@@ -20,7 +21,7 @@ const PriceRangeSlider = ({ priceRange, setpriceRange }) => {
           min={0}
           max={30000}
           step={500}
-          style={{ color: "gray" }}
+          style={{ color: "black" }}
           valueLabelFormat={(value) => `${value}`}
         />
         <div className={classes.PriceRangeContainer}>
