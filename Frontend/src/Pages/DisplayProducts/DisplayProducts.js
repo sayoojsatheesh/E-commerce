@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 // MUI //
 import { Grid, useTheme, useMediaQuery, Box, Button } from "@mui/material";
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
-import { styled } from "@mui/material/styles";
 // Custom //
 import API_BASE_URL from "../../Utilis/apiConfig";
 import LoadingSkeleton from "../../Components/LoadingSkelton/LoadingSkelton";
@@ -30,7 +29,6 @@ const DisplayProducts = () => {
   });
   const [colours, setcolours] = useState([]);
   const [priceRange, setpriceRange] = useState([0, 30000]);
-  const [open, setOpen] = React.useState(false);
 
   const theme = useTheme();
   const mediumScreen = useMediaQuery(theme.breakpoints.up("md"));
@@ -42,8 +40,10 @@ const DisplayProducts = () => {
   const pathSegments = currentPath.split("/");
   const endingPath = pathSegments[pathSegments.length - 1];
 
-  const { fetchNextPage, hasNextPage, data, refetch, isFetching } =
-    useInfiniteQuery(["products"], ({ pageParam }) => fetchData(pageParam), {
+  const { fetchNextPage, data, refetch, isFetching } = useInfiniteQuery(
+    ["products"],
+    ({ pageParam }) => fetchData(pageParam),
+    {
       getNextPageParam: (lastPage) => {
         // Use the offset returned from the backend response for the next page
         if (lastPage.offset > 25) {
@@ -53,24 +53,24 @@ const DisplayProducts = () => {
       },
       retry: 0,
       staleTime: Infinity,
-    });
+    }
+  );
 
   // Refetch data when filter changes //
   useEffect(() => {
     if (filters) {
       refetch();
     }
-  }, [filters, endingPath]);
+  }, [filters, endingPath,genders]);
   console.log("colours =", colours);
   // Get Products data //
   async function fetchData(offset = 0) {
-    const filtersQueryString = new URLSearchParams(filters).toString();
     try {
       const response = await axios.get(
         `${API_BASE_URL}/items?offset=${offset}`,
         {
           params: {
-            filterBy: { genders, priceRange, colours,sortBy },
+            filterBy: { genders, priceRange, colours, sortBy },
             path: endingPath,
           },
         }

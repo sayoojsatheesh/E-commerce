@@ -19,7 +19,7 @@ const PriceRangeSlider = ({ priceRange, setpriceRange }) => {
           onChange={handlePriceChange}
           valueLabelDisplay="auto"
           min={0}
-          max={30000}
+          max={20000}
           step={500}
           style={{ color: "black" }}
           valueLabelFormat={(value) => `${value}`}
