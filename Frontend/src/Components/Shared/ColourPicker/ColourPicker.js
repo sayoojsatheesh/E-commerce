@@ -7,7 +7,7 @@ import SingleColour from "../../SingleColour/SingleColour";
 const ColourPicker = ({ setcolours, colours }) => {
   
   return (
-    <Box>
+    <Box sx={{marginBottom:'1rem'}}>
       <Box>
         <Box className={classes.ColourContainer}>
           <SingleColour

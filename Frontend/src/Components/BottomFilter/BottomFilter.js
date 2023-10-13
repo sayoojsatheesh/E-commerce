@@ -25,6 +25,7 @@ const BottomFilter = ({
   colours,
   setcolours,
   endingPath,
+  refetch
 }) => {
   const toggleDrawer = (open) => (event) => {
     if (
@@ -75,6 +76,7 @@ const BottomFilter = ({
           <PriceRangeSlider
             priceRange={priceRange}
             setpriceRange={setpriceRange}
+            refetch={refetch}
           />
           <h3>Colours {coloursCount}</h3>
           <ColourPicker setcolours={setcolours} colours={colours} />

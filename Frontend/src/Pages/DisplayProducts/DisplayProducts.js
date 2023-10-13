@@ -19,7 +19,7 @@ import { useLocation } from "react-router-dom";
 import "animate.css";
 
 const DisplayProducts = () => {
-  const [showFilters, setshowFilters] = useState(false);
+  const [showFilters, setshowFilters] = useState(true);
   const [sortBy, setsortBy] = useState("");
   const [filters, setfilters] = useState({});
   const [genders, setgenders] = useState({
@@ -28,7 +28,7 @@ const DisplayProducts = () => {
     Kids: false,
   });
   const [colours, setcolours] = useState([]);
-  const [priceRange, setpriceRange] = useState([0, 30000]);
+  const [priceRange, setpriceRange] = useState([0, 20000]);
 
   const theme = useTheme();
   const mediumScreen = useMediaQuery(theme.breakpoints.up("md"));
@@ -61,8 +61,8 @@ const DisplayProducts = () => {
     if (filters) {
       refetch();
     }
-  }, [filters, endingPath,genders]);
-  console.log("colours =", colours);
+  }, [filters, endingPath, genders, colours]);
+
   // Get Products data //
   async function fetchData(offset = 0) {
     try {
@@ -106,6 +106,7 @@ const DisplayProducts = () => {
       setcolours={setcolours}
       colours={colours}
       endingPath={endingPath}
+      refetch={refetch}
     />
   ) : (
     <BottomFilter
@@ -120,6 +121,7 @@ const DisplayProducts = () => {
       setcolours={setcolours}
       colours={colours}
       endingPath={endingPath}
+      refetch={refetch}
     />
   );
 
@@ -141,6 +143,7 @@ const DisplayProducts = () => {
                 color: "black",
                 borderRadius: "50px",
                 border: "none",
+                fontSize: "large",
               }}
               variant="text"
               endIcon={<TuneOutlinedIcon />}

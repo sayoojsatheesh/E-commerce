@@ -15,6 +15,7 @@ const SideFilter = ({
   colours,
   setcolours,
   endingPath,
+  refetch
 }) => {
   let genderSelectedCount = countTrueFalseKeys(genders);
   let coloursCount = colours.length == 0 ? "" : `(${colours.length})`;
@@ -32,6 +33,7 @@ const SideFilter = ({
         <PriceRangeSlider
           priceRange={priceRange}
           setpriceRange={setpriceRange}
+          refetch={refetch}
         />
       </CustomAccordion>
       <CustomAccordion heading={`Colours ${coloursCount ? coloursCount : ""}`}>

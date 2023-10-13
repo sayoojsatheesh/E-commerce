@@ -3,6 +3,8 @@ import classes from "./ProductCard.module.css";
 // React //
 import { useEffect, useState } from "react";
 import formatNumberWithSpaces from "../../Utilis/FormatPrice";
+// MUI //
+import CircularProgress from "@mui/material/CircularProgress";
 
 const ProductsCard = (props) => {
   const [imageUrl, setImageUrl] = useState(null);
@@ -43,11 +45,12 @@ const ProductsCard = (props) => {
     return colors?.split("/").length;
   }
   return (
-    <div
-      className={`${classes.ProductContainer} ${
-        props.isFetching ? classes.TransparentBackground : null
-      }`}
-    >
+    <div className={`${classes.ProductContainer} `}>
+      {props.isFetching ? (
+        <div className={classes.OverLay}>
+          <CircularProgress />
+        </div>
+      ) : null}
       <img
         src={imageUrl ? imageUrl : "/Images/WhiteScreen.avif"}
         alt="ProductImage"

@@ -3,7 +3,7 @@ import { Box, Slider } from "@mui/material";
 // CSS //
 import classes from "./PriceRangeSlider.module.css";
 
-const PriceRangeSlider = ({ priceRange, setpriceRange }) => {
+const PriceRangeSlider = ({ priceRange, setpriceRange, refetch }) => {
   // Function helps to change price range//
   const handlePriceChange = (event, newValue) => {
     setpriceRange(newValue);
@@ -13,7 +13,7 @@ const PriceRangeSlider = ({ priceRange, setpriceRange }) => {
     <Box>
       <Box sx={{ padding: ".2rem .5rem" }}>
         <Slider
-         size="small"
+          size="small"
           getAriaLabel={() => "Temperature range"}
           value={priceRange}
           onChange={handlePriceChange}
@@ -23,6 +23,9 @@ const PriceRangeSlider = ({ priceRange, setpriceRange }) => {
           step={500}
           style={{ color: "black" }}
           valueLabelFormat={(value) => `${value}`}
+          onChangeCommitted={() => {
+            refetch();
+          }}
         />
         <div className={classes.PriceRangeContainer}>
           Selected Price Range:

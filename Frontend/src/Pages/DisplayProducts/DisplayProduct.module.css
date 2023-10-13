@@ -1,6 +1,7 @@
 .ProductDisplayContainer {
   display: flex;
   margin-bottom: 1rem;
+  min-height: 90vh;
 }
 
 

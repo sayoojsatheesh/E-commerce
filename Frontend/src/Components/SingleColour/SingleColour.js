@@ -1,10 +1,16 @@
 // MUI //
 import { Box } from "@mui/material";
+import DoneIcon from "@mui/icons-material/Done";
+
 const SingleColour = ({ colour, border, setcolours, colours }) => {
+  let colourFound = colours?.find((item) => {
+    return item == colour;
+  });
+
   // Handle Colour Add/Remove //
   function handleColourAdd(Colour) {
     let colourFound = colours?.find((item) => {
-      return item == Colour;
+      return item === Colour;
     });
 
     if (colourFound) {
@@ -18,6 +24,7 @@ const SingleColour = ({ colour, border, setcolours, colours }) => {
       });
     }
   }
+  
   return (
     <Box sx={{ width: "30%" }}>
       <Box
@@ -47,9 +54,31 @@ const SingleColour = ({ colour, border, setcolours, colours }) => {
                 : `null`,
             backgroundColor: `${colour}`,
             border: `${border ? "1px solid gray" : null}`,
-            cursor: "pointer"
+            cursor: "pointer",
+            position: "relative",
           }}
-        ></Box>
+        >
+          {colourFound ? (
+            <Box
+              sx={{
+                position: "absolute",
+                top: "0",
+                bottom: "0",
+                left: "0",
+                right: "0",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <DoneIcon
+                sx={{
+                  color: "olive",
+                }}
+              />
+            </Box>
+          ) : null}
+        </Box>
         <Box>{colour}</Box>
       </Box>
     </Box>

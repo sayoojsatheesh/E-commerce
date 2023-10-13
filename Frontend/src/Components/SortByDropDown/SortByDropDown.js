@@ -18,6 +18,7 @@ const SortByDropDown = (props) => {
         value={props.sortBy}
         onChange={handleChange}
         sx={{
+          fontSize: "large",
           "& .MuiOutlinedInput-notchedOutline": {
             border: "none !important", // Remove the border
           },

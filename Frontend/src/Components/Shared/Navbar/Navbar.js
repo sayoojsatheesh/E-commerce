@@ -24,7 +24,12 @@ const Navbar = () => {
       }`}
     >
       <div>
-        <img src={"/Images/logo.svg"} className={classes.Logo} alt="logo" />
+        <Link
+          style={{ textDecoration: "none", color: "black" }}
+          to="/"
+        >
+          <img src={"/Images/logo.svg"} className={classes.Logo} alt="logo" />
+        </Link>
       </div>
       {dontShowMenuIcon ? null : (
         <div className={classes.MiddleSection}>
