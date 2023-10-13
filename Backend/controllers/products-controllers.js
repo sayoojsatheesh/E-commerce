@@ -9,9 +9,7 @@ const getAllItems = async (req, res, next) => {
   let sortBy = filters?.sortBy;
   const limit = 9; // Number of items per page
 
-  console.log("filters =", filters);
-  console.log("sortBy =", sortBy);
-  console.log("categories =", categories);
+  let coloursArray = filters.colours;
 
   let subtitlePrefix = "";
 
@@ -42,9 +40,33 @@ const getAllItems = async (req, res, next) => {
 
   if (categories == "all") {
     subtitlePrefix = generateString(filters.genders);
-  }  
-
+  }
+  // Price Range //
+  let startPrice = filters.priceRange[0];
+  let endPrice = filters.priceRange[1];
+  // Gender Filter //
   let genderQuery = { subTitle: { $regex: `^${subtitlePrefix}` } };
+  // Price Filter //
+  let priceRange = {
+    "price.CurrentPrice": {
+      $gt: parseFloat(startPrice),
+      $lt: parseFloat(endPrice),
+    },
+  };
+  // Colour Filter //
+  const regexPattern = coloursArray?.map((color) => `(${color})`).join("|");
+  const regex = new RegExp(regexPattern, "i"); // 'i' flag for case-insensitive matching
+  let coloursQuery = {};
+  if (coloursArray) {
+    coloursQuery = { colour: { $regex: regex } };
+    let found = coloursArray.find((item) => {
+      return item == "Multi";
+    });
+    if (found) {
+      coloursQuery = {};
+    }
+  }
+
   try {
     let order;
     if (!sortBy) {
@@ -56,7 +78,7 @@ const getAllItems = async (req, res, next) => {
     let products;
     if (sortBy) {
       products = await productList
-        .find(genderQuery)
+        .find({ $and: [genderQuery, priceRange, coloursQuery] })
         .skip(offset)
         .limit(limit)
         .select({
@@ -73,7 +95,7 @@ const getAllItems = async (req, res, next) => {
         .sort({ price: order });
     } else {
       products = await productList
-        .find(genderQuery)
+        .find({ $and: [genderQuery, priceRange, coloursQuery] })
         .skip(offset)
         .limit(limit)
         .select({
@@ -89,16 +111,11 @@ const getAllItems = async (req, res, next) => {
         });
     }
 
+    // Count of Data Returned //
     let totalCount;
-    console.log(categories === "all" && subtitlePrefix.length > 0)
-    if (categories === "all" && subtitlePrefix.length == 0) {
-      totalCount = await productList.countDocuments({});
-    } else {
-      totalCount = await productList.countDocuments({
-        subTitle: { $regex: `^${subtitlePrefix}` },
-      });
-    }
-
+    totalCount = await productList.countDocuments({
+      $and: [genderQuery, priceRange, coloursQuery],
+    });
     offset = offset + 9;
 
     res.status(200).json({ products, totalCount, offset });
