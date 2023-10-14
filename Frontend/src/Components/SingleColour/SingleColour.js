@@ -4,7 +4,7 @@ import DoneIcon from "@mui/icons-material/Done";
 
 const SingleColour = ({ colour, border, setcolours, colours }) => {
   let colourFound = colours?.find((item) => {
-    return item == colour;
+    return item === colour;
   });
 
   // Handle Colour Add/Remove //
@@ -44,7 +44,7 @@ const SingleColour = ({ colour, border, setcolours, colours }) => {
             width: "30px",
             height: "30px",
             backgroundImage:
-              colour == "Multi"
+              colour === "Multi"
                 ? `linear-gradient(90deg, 
                 rgba(2,0,36,1) 0%, 
                 rgba(68,68,117,1) 23%, 

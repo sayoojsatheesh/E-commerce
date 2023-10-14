@@ -5,10 +5,13 @@ import { useEffect, useState } from "react";
 import formatNumberWithSpaces from "../../Utilis/FormatPrice";
 // MUI //
 import CircularProgress from "@mui/material/CircularProgress";
+// Other //
+import { Link } from "react-router-dom";
 
 const ProductsCard = (props) => {
   const [imageUrl, setImageUrl] = useState(null);
 
+  console.log(props.data.id);
   // Covert Image buffer to Image //
   const loadImageAsync = async () => {
     if (props.data?.image1?.data) {
@@ -45,28 +48,33 @@ const ProductsCard = (props) => {
     return colors?.split("/").length;
   }
   return (
-    <div className={`${classes.ProductContainer} `}>
-      {props.isFetching ? (
-        <div className={classes.OverLay}>
-          <CircularProgress />
-        </div>
-      ) : null}
-      <img
-        src={imageUrl ? imageUrl : "/Images/WhiteScreen.avif"}
-        alt="ProductImage"
-        className={classes.ProductImage}
-      />
-      {imageUrl ? (
-        <div className={classes.ProductInfo}>
-          <div className={classes.title}>{props.data?.title}</div>
-          <div className={classes.subTitle}>{props.data?.subTitle}</div>
-          <div className={classes.subTitle}>
-            {availableColours} {colourText}
+    <Link
+      style={{ textDecoration: "none", color: "black" }}
+      to={`${props.isFetching ? "#" : `/products/${props.data.id}`}`}
+    >
+      <div className={`${classes.ProductContainer} `}>
+        {props.isFetching ? (
+          <div className={classes.OverLay}>
+            <CircularProgress />
           </div>
-          <div className={classes.title}>MRP : ₹ {currentPrice}</div>
-        </div>
-      ) : null}
-    </div>
+        ) : null}
+        <img
+          src={imageUrl ? imageUrl : "/Images/WhiteScreen.avif"}
+          alt="ProductImage"
+          className={classes.ProductImage}
+        />
+        {imageUrl ? (
+          <div className={classes.ProductInfo}>
+            <div className={classes.title}>{props.data?.title}</div>
+            <div className={classes.subTitle}>{props.data?.subTitle}</div>
+            <div className={classes.subTitle}>
+              {availableColours} {colourText}
+            </div>
+            <div className={classes.title}>MRP : ₹ {currentPrice}</div>
+          </div>
+        ) : null}
+      </div>
+    </Link>
   );
 };
 
