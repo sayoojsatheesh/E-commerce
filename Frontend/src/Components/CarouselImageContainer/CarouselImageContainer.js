@@ -13,7 +13,9 @@ const CarouselImageConatainer = (props) => {
       }`}
     >
       <img src={props.imagePath} alt="SlideImage" className={classes.Image} />
-      <button className={classes.button}>SHOP NOW</button>
+      {props.showButton ? (
+        <button className={classes.button}>SHOP NOW</button>
+      ) : null}
     </div>
   );
 };

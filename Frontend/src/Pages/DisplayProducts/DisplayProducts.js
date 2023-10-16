@@ -19,7 +19,9 @@ import { useLocation } from "react-router-dom";
 import "animate.css";
 
 const DisplayProducts = () => {
-  const [showFilters, setshowFilters] = useState(true);
+  const theme = useTheme();
+  const mediumScreen = useMediaQuery(theme.breakpoints.up("md"));
+  const [showFilters, setshowFilters] = useState(mediumScreen);
   const [sortBy, setsortBy] = useState("");
   const [filters, setfilters] = useState({});
   const [genders, setgenders] = useState({
@@ -29,9 +31,6 @@ const DisplayProducts = () => {
   });
   const [colours, setcolours] = useState([]);
   const [priceRange, setpriceRange] = useState([0, 20000]);
-
-  const theme = useTheme();
-  const mediumScreen = useMediaQuery(theme.breakpoints.up("md"));
 
   // Access the current path from the URL
   const location = useLocation();
@@ -187,6 +186,7 @@ const DisplayProducts = () => {
                 width: "100%",
               }}
               spacing={2}
+        
             >
               {flattenData.map((item) => (
                 <Grid item key={item._id} xs={6} md={4}>

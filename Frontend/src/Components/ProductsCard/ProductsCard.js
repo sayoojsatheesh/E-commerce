@@ -5,40 +5,22 @@ import { useEffect, useState } from "react";
 import formatNumberWithSpaces from "../../Utilis/FormatPrice";
 // MUI //
 import CircularProgress from "@mui/material/CircularProgress";
+// Custom //
+import BufferToImage from "../../Utilis/BufferToImage";
 // Other //
 import { Link } from "react-router-dom";
 
 const ProductsCard = (props) => {
   const [imageUrl, setImageUrl] = useState(null);
 
-  console.log(props.data.id);
-  // Covert Image buffer to Image //
-  const loadImageAsync = async () => {
-    if (props.data?.image1?.data) {
-      const uint8Array = new Uint8Array(props.data.image1.data);
-      const blob = new Blob([uint8Array], {
-        type: props.data.image1.type,
-      });
-      const imageUrl = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          resolve(reader.result);
-        };
-        reader.readAsDataURL(blob);
-      });
-      return imageUrl;
-    }
-    return null;
-  };
-
   useEffect(() => {
     const loadImage = async () => {
-      const url = await loadImageAsync();
+      const url = await BufferToImage(props.data?.image1);
       setImageUrl(url);
     };
     loadImage();
   }, [props.data]); // Run the effect whenever props.data changes
-
+console.log("img=",imageUrl)
   let availableColours = CountColor(props.data?.colour);
   let colourText = availableColours > 1 ? "Colours" : "Colour";
   let currentPrice = formatNumberWithSpaces(props.data?.price.CurrentPrice);
