@@ -14,9 +14,9 @@ const SingleProductSkeleton = () => {
       >
         <Skeleton variant="rectangular" width={342} height={32} />
         <Skeleton variant="rectangular" width={100} height={21} />
+        <Skeleton variant="rectangular" width={200} height={21} />
         <Skeleton variant="rectangular" width={100} height={21} />
-        <Skeleton variant="rectangular" width={100} height={21} />
-        <Skeleton variant="rectangular" width={100} height={21} />
+        <Skeleton variant="rectangular" width={170} height={21} />
       </Box>
       <Skeleton variant="rectangular" width={390} height={253.19} />
     </Stack>

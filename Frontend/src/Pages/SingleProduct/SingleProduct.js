@@ -88,6 +88,8 @@ const SingleProduct = () => {
               productName={productData.title}
               productSubTitle={productData.subTitle}
               price={productData.price.CurrentPrice}
+              OriginalPrice={productData.price.OriginalPrice}
+              DiscountPrecentage={productData.price.DiscountPrecentage}
             />
             {mediumScreen ? null : imageUrl.length > 0 ? (
               <CustomCarousel
