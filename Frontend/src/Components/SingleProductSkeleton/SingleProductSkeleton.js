@@ -9,7 +9,7 @@ const SingleProductSkeleton = () => {
           padding: "1rem 1.5rem",
           display: "flex",
           flexDirection: "column",
-          rowGap:1
+          rowGap: 1,
         }}
       >
         <Skeleton variant="rectangular" width={342} height={32} />
@@ -18,7 +18,9 @@ const SingleProductSkeleton = () => {
         <Skeleton variant="rectangular" width={100} height={21} />
         <Skeleton variant="rectangular" width={170} height={21} />
       </Box>
-      <Skeleton variant="rectangular" width={390} height={253.19} />
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Skeleton variant="rectangular" width={500} height={253.19} />
+      </Box>
     </Stack>
   );
 };

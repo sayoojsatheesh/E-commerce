@@ -8,15 +8,17 @@
   font-size: 18px;
   border: none;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .WishListButton {
   background-color: white;
   color: black;
   border: 1px solid gray;
+  cursor: pointer;
 }
 
-.svg{
-    position: absolute;
-    margin-left: 3px;
+.svg {
+  position: absolute;
+  margin-left: 3px;
 }

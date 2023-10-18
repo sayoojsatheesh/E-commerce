@@ -15,17 +15,23 @@ let sizeChart = [
 
 const styles = {
   disabled: {
-    pointerEvents: "none",
     backgroundColor: "lightgray",
     color: "gray",
     border: "none",
+    cursor: "not-allowed",
   },
 };
 
 const SizeSelector = () => {
   return (
     <Box sx={{ padding: "1rem 1.5rem" }}>
-      <Box sx={{ display: "flex", justifyContent: "space-between",marginBottom:'4px'}}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: "4px",
+        }}
+      >
         <span style={{ fontWeight: "bold" }}>Select Size</span>
         <span style={{ color: "gray" }}>Size Guide</span>
       </Box>
@@ -47,6 +53,7 @@ const SizeSelector = () => {
                   textAlign: "center",
                   borderRadius: "5px",
                   padding: "10px",
+                  cursor: "pointer",
                 }}
               >
                 {item.size}

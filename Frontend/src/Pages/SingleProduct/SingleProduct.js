@@ -78,7 +78,12 @@ const SingleProduct = () => {
     <>
       {loadingData ? (
         <Box>
-          <SingleProductSkeleton />
+          <Grid container>
+            <Grid item md={7}></Grid>
+            <Grid item md={5}>
+              <SingleProductSkeleton />
+            </Grid>
+          </Grid>
         </Box>
       ) : (
         <Grid container>
