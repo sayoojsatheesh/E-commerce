@@ -1,0 +1,14 @@
+.MainContainer {
+  display: flex;
+  padding: 1.5rem 2.5rem;
+  position: sticky;
+  top: 105px;
+}
+
+.LeftSide {
+  width: 25%;
+}
+
+.RightSide {
+  width: 75%;
+}

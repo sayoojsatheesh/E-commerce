@@ -10,6 +10,7 @@ import BufferToImage from "../../Utilis/BufferToImage";
 import SingleProductSkeleton from "../../Components/SingleProductSkeleton/SingleProductSkeleton";
 import SizeSelector from "../../Components/SizeSelector/SizeSelector";
 import ProductReview from "../../Components/ProductReview/ProductReview";
+import ProductImageViewer from "../../Components/ProductImageViewer/ProductImageViewer";
 
 // Other //
 import axios from "axios";
@@ -87,7 +88,9 @@ const SingleProduct = () => {
         </Box>
       ) : (
         <Grid container>
-          <Grid item md={7}></Grid>
+          <Grid item md={7}>
+            <ProductImageViewer ImageUrls={imageUrl} />
+          </Grid>
           <Grid item md={5}>
             <ProductInfo
               productName={productData.title}
