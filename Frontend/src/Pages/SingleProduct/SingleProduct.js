@@ -89,7 +89,7 @@ const SingleProduct = () => {
       ) : (
         <Grid container>
           <Grid item md={7}>
-            <ProductImageViewer ImageUrls={imageUrl} />
+            {mediumScreen ? <ProductImageViewer ImageUrls={imageUrl} /> : null}
           </Grid>
           <Grid item md={5}>
             <ProductInfo
