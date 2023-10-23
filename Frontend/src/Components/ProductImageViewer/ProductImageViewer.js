@@ -15,7 +15,6 @@ const ProductImageViewer = (props) => {
     setimageURL(props?.ImageUrls[0]?.img);
   }, [props.ImageUrls]);
 
-  console.log("imageURL =", props.ImageUrls);
   return (
     <Box className={classes.MainContainer}>
       <Box className={classes.LeftSide}>

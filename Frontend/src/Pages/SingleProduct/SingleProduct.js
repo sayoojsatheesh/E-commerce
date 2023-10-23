@@ -31,11 +31,10 @@ const SingleProduct = () => {
 
   useEffect(() => {
     if (!productData.title) {
-      console.log("in");
       return;
     }
     const loadImage = async () => {
-      console.log("productData.image1 =", productData.image1);
+  
       const url1 = await BufferToImage(productData.image1);
       const url2 = await BufferToImage(productData.image2);
       const url3 = await BufferToImage(productData.image3);
@@ -52,9 +51,6 @@ const SingleProduct = () => {
     loadImage();
   }, [productData]);
 
-  console.log(productData);
-  console.log("imageUrl =", imageUrl);
-
   // Access the current path from the URL
   const location = useLocation();
   const currentPath = location.pathname;
@@ -62,7 +58,6 @@ const SingleProduct = () => {
   const pathSegments = currentPath.split("/");
   const endingPath = pathSegments[pathSegments.length - 1];
 
-  console.log("response =", productData);
   async function getSingleProduct() {
     try {
       const response = await axios.get(

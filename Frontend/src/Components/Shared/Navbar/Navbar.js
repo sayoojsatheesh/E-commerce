@@ -1,3 +1,5 @@
+// React //
+import { useState } from "react";
 // CSS //
 import classes from "./Navbar.module.css";
 // MUI Icons //
@@ -10,12 +12,14 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { useMediaQuery, useTheme } from "@mui/material";
 // Custom Components //
 import SearchBar from "../../SearchBar/SearchBar";
+import LeftSideDrawer from "../../LeftSideDrawer/LeftSideDrawer";
 // Other //
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const theme = useTheme();
   const dontShowMenuIcon = useMediaQuery(theme.breakpoints.down("md"));
+  const [openDrawer, setopenDrawer] = useState(false);
 
   return (
     <div
@@ -24,10 +28,7 @@ const Navbar = () => {
       }`}
     >
       <div>
-        <Link
-          style={{ textDecoration: "none", color: "black" }}
-          to="/"
-        >
+        <Link style={{ textDecoration: "none", color: "black" }} to="/">
           <img src={"/Images/logo.svg"} className={classes.Logo} alt="logo" />
         </Link>
       </div>
@@ -78,9 +79,18 @@ const Navbar = () => {
           fontSize="large"
         />
         {dontShowMenuIcon ? (
-          <MenuOutlinedIcon className={classes.IconColor} fontSize="large" />
+          <MenuOutlinedIcon
+            onClick={() => {
+              setopenDrawer((prevState) => {
+                return !prevState;
+              });
+            }}
+            className={classes.IconColor}
+            fontSize="large"
+          />
         ) : null}
       </div>
+      <LeftSideDrawer openDrawer={openDrawer} setopenDrawer={setopenDrawer} />
     </div>
   );
 };

@@ -24,8 +24,6 @@ const LeftSideImageViewer = (props) => {
           }}
           onMouseOver={() => {
             props.setimageURL(item.img);
-            console.log("id =",item.img)
-            console.log("item.img ",props.imageURL == item.img)
           }}
         >
           <img

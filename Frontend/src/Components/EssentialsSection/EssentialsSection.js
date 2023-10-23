@@ -2,6 +2,8 @@
 import { Grid, Box } from "@mui/material";
 // Custom //
 import CategoriesContainer from "../CategoriesContainer/CategoriesContainer";
+// Other //
+import { Link } from "react-router-dom";
 
 const EssentialsSection = () => {
   return (
@@ -13,15 +15,39 @@ const EssentialsSection = () => {
         paddingRight: "16px",
       }}
     >
-      <Grid container rowGap={1} columnSpacing={1} justifyContent='center'>
+      <Grid container rowGap={1} columnSpacing={1} justifyContent="center">
         <Grid item xs={12} sm={4}>
-          <CategoriesContainer buttonText={`Men's`} imagePath={"/Images/Mens.webp"} />
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
+            to="/products/men"
+          >
+            <CategoriesContainer
+              buttonText={`Men's`}
+              imagePath={"/Images/Mens.webp"}
+            />
+          </Link>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <CategoriesContainer buttonText={`Women's`} imagePath={"/Images/Womens.webp"} />
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
+            to="/products/women"
+          >
+            <CategoriesContainer
+              buttonText={`Women's`}
+              imagePath={"/Images/Womens.webp"}
+            />
+          </Link>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <CategoriesContainer buttonText={`Kid's`} imagePath={"/Images/Kids.webp"} />
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
+            to="/products/kids"
+          >
+            <CategoriesContainer
+              buttonText={`Kid's`}
+              imagePath={"/Images/Kids.webp"}
+            />
+          </Link>
         </Grid>
       </Grid>
     </Box>

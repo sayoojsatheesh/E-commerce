@@ -60,7 +60,7 @@ const DisplayProducts = () => {
     if (filters) {
       refetch();
     }
-  }, [filters, endingPath, genders, colours]);
+  }, [filters, endingPath, genders, colours,sortBy]);
 
   // Get Products data //
   async function fetchData(offset = 0) {
@@ -176,7 +176,7 @@ const DisplayProducts = () => {
             hasMore={
               data?.pages[0]?.totalCount !== flattenData.length ? true : false
             }
-            loader={<div className={classes.Loader}>Loading More</div>}
+            loader={<div className={classes.Loader}>Loading More...</div>}
           >
             <Grid
               container
@@ -186,7 +186,6 @@ const DisplayProducts = () => {
                 width: "100%",
               }}
               spacing={2}
-        
             >
               {flattenData.map((item) => (
                 <Grid item key={item._id} xs={6} md={4}>

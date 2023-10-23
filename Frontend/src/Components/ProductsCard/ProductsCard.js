@@ -20,7 +20,6 @@ const ProductsCard = (props) => {
     };
     loadImage();
   }, [props.data]); // Run the effect whenever props.data changes
-console.log("img=",imageUrl)
   let availableColours = CountColor(props.data?.colour);
   let colourText = availableColours > 1 ? "Colours" : "Colour";
   let currentPrice = formatNumberWithSpaces(props.data?.price.CurrentPrice);
