@@ -11,10 +11,12 @@ import SingleProductSkeleton from "../../Components/SingleProductSkeleton/Single
 import SizeSelector from "../../Components/SizeSelector/SizeSelector";
 import ProductReview from "../../Components/ProductReview/ProductReview";
 import ProductImageViewer from "../../Components/ProductImageViewer/ProductImageViewer";
+import { addProduct } from "../../features/productsSlice";
 
 // Other //
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
 // CSS //
 import classes from "./SingleProduct.module.css";
 
@@ -25,6 +27,9 @@ const SingleProduct = () => {
   const [loadingData, setloadingData] = useState(true);
   const [imageUrl, setImageUrl] = useState([]);
 
+  const dispatch = useDispatch();
+
+
   useEffect(() => {
     getSingleProduct();
   }, []);
@@ -34,7 +39,6 @@ const SingleProduct = () => {
       return;
     }
     const loadImage = async () => {
-  
       const url1 = await BufferToImage(productData.image1);
       const url2 = await BufferToImage(productData.image2);
       const url3 = await BufferToImage(productData.image3);
@@ -70,6 +74,29 @@ const SingleProduct = () => {
       console.log("Error in getSingleProduct", error);
     }
   }
+
+  function handleAddCart() {
+    dispatch(
+      addProduct({
+        type: "cart",
+        title: productData.title,
+        subTitle: productData.subTitle,
+        price: productData.price.CurrentPrice,
+      })
+    );
+  }
+
+  function handleFavButton() {
+    dispatch(
+      addProduct({
+        title: productData.title,
+        subTitle: productData.subTitle,
+        price: productData.price.CurrentPrice,
+        imageURL: imageUrl.url1,
+      })
+    );
+  }
+
   return (
     <>
       {loadingData ? (
@@ -103,7 +130,9 @@ const SingleProduct = () => {
             ) : null}
             <SizeSelector />
             <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <button className={classes.AddButton}>Add to Cart</button>
+              <button onClick={handleAddCart} className={classes.AddButton}>
+                Add to Cart
+              </button>
             </Box>
             <Box
               sx={{
@@ -113,13 +142,14 @@ const SingleProduct = () => {
               }}
             >
               <button
+                onClick={handleFavButton}
                 className={`${classes.WishListButton} ${classes.AddButton}`}
               >
                 Favourite
                 <svg
                   stroke="currentColor"
                   fill="currentColor"
-                  stroke-width="0"
+                  strokeWidth="0"
                   viewBox="0 0 512 512"
                   height="20"
                   width="20"

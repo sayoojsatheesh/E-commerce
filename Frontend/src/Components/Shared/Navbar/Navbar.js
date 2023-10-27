@@ -9,18 +9,28 @@ import ShoppingCartCheckoutOutlinedIcon from "@mui/icons-material/ShoppingCartCh
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 // MUI //
-import { useMediaQuery, useTheme } from "@mui/material";
+import { useMediaQuery, useTheme, Badge } from "@mui/material";
 // Custom Components //
 import SearchBar from "../../SearchBar/SearchBar";
 import LeftSideDrawer from "../../LeftSideDrawer/LeftSideDrawer";
 // Other //
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const theme = useTheme();
   const dontShowMenuIcon = useMediaQuery(theme.breakpoints.down("md"));
   const [openDrawer, setopenDrawer] = useState(false);
 
+  const cartItems = useSelector((state) => {
+    return state.products.cartList;
+  });
+
+  const favItems = useSelector((state) => {
+    return state.products.favourites;
+  });
+
+  console.log("cartItems", cartItems);
   return (
     <div
       className={`${classes.NavbarContainer} ${
@@ -66,14 +76,18 @@ const Navbar = () => {
         ) : (
           <SearchBar />
         )}
-        <FavoriteBorderOutlinedIcon
-          className={classes.IconColor}
-          fontSize="large"
-        />
-        <ShoppingCartCheckoutOutlinedIcon
-          className={classes.IconColor}
-          fontSize="large"
-        />
+        <Badge badgeContent={favItems.length} color="info">
+          <FavoriteBorderOutlinedIcon
+            className={classes.IconColor}
+            fontSize="large"
+          />
+        </Badge>
+        <Badge badgeContent={cartItems.length} color="info">
+          <ShoppingCartCheckoutOutlinedIcon
+            className={classes.IconColor}
+            fontSize="large"
+          />
+        </Badge>
         <PersonOutlineOutlinedIcon
           className={classes.IconColor}
           fontSize="large"
