@@ -29,7 +29,6 @@ const SingleProduct = () => {
 
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     getSingleProduct();
   }, []);
@@ -82,6 +81,8 @@ const SingleProduct = () => {
         title: productData.title,
         subTitle: productData.subTitle,
         price: productData.price.CurrentPrice,
+        imageURL: imageUrl[0].img,
+        id: productData.id,
       })
     );
   }
@@ -92,7 +93,8 @@ const SingleProduct = () => {
         title: productData.title,
         subTitle: productData.subTitle,
         price: productData.price.CurrentPrice,
-        imageURL: imageUrl.url1,
+        imageURL: imageUrl[0].img,
+        id: productData.id,
       })
     );
   }

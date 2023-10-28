@@ -17,20 +17,27 @@ import LeftSideDrawer from "../../LeftSideDrawer/LeftSideDrawer";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+const styles = {
+  linkStyle: {
+    textDecoration: "none",
+    color: "black", // You can adjust the margin value as per your preference
+  },
+};
+
 const Navbar = () => {
   const theme = useTheme();
   const dontShowMenuIcon = useMediaQuery(theme.breakpoints.down("md"));
   const [openDrawer, setopenDrawer] = useState(false);
 
+  // Getting Items count from Local Storage //
   const cartItems = useSelector((state) => {
-    return state.products.cartList;
+    return state.products.totalItemsInCart;
   });
 
   const favItems = useSelector((state) => {
-    return state.products.favourites;
+    return state.products.totalItemsInFavourites;
   });
 
-  console.log("cartItems", cartItems);
   return (
     <div
       className={`${classes.NavbarContainer} ${
@@ -38,34 +45,22 @@ const Navbar = () => {
       }`}
     >
       <div>
-        <Link style={{ textDecoration: "none", color: "black" }} to="/">
+        <Link style={styles.linkStyle} to="/">
           <img src={"/Images/logo.svg"} className={classes.Logo} alt="logo" />
         </Link>
       </div>
       {dontShowMenuIcon ? null : (
         <div className={classes.MiddleSection}>
-          <Link
-            style={{ textDecoration: "none", color: "black" }}
-            to="/products/all"
-          >
+          <Link style={styles.linkStyle} to="/products/all">
             <span className={classes.Catagories}>All</span>
           </Link>
-          <Link
-            style={{ textDecoration: "none", color: "black" }}
-            to="/products/men"
-          >
+          <Link style={styles.linkStyle} to="/products/men">
             <span className={classes.Catagories}>Men</span>
           </Link>
-          <Link
-            style={{ textDecoration: "none", color: "black" }}
-            to="/products/women"
-          >
+          <Link style={styles.linkStyle} to="/products/women">
             <span className={classes.Catagories}>Women</span>
           </Link>
-          <Link
-            style={{ textDecoration: "none", color: "black" }}
-            to="/products/kids"
-          >
+          <Link style={styles.linkStyle} to="/products/kids">
             <span className={classes.Catagories}>Kids</span>
           </Link>
         </div>
@@ -76,17 +71,21 @@ const Navbar = () => {
         ) : (
           <SearchBar />
         )}
-        <Badge badgeContent={favItems.length} color="info">
-          <FavoriteBorderOutlinedIcon
-            className={classes.IconColor}
-            fontSize="large"
-          />
+        <Badge badgeContent={favItems} color="info">
+          <Link style={styles.linkStyle} to="/products/favourites">
+            <FavoriteBorderOutlinedIcon
+              className={classes.IconColor}
+              fontSize="large"
+            />
+          </Link>
         </Badge>
-        <Badge badgeContent={cartItems.length} color="info">
-          <ShoppingCartCheckoutOutlinedIcon
-            className={classes.IconColor}
-            fontSize="large"
-          />
+        <Badge badgeContent={cartItems} color="info">
+          <Link style={styles.linkStyle} to="/products/cart">
+            <ShoppingCartCheckoutOutlinedIcon
+              className={classes.IconColor}
+              fontSize="large"
+            />
+          </Link>
         </Badge>
         <PersonOutlineOutlinedIcon
           className={classes.IconColor}
