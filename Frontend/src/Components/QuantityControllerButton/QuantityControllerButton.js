@@ -5,13 +5,21 @@ import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOut
 // Redux //
 import { useDispatch } from "react-redux";
 // Custom//
-import { removeProduct } from "../../features/productsSlice";
+import { removeProduct, updateProduct } from "../../features/productsSlice";
 
 const QuantityControllerButton = ({ quantity, id }) => {
   const dispatch = useDispatch();
+
+  // Remove products one by one //
   function handleRemoveProduct() {
     dispatch(removeProduct({ type: "cart", removeCount: "one", id }));
   }
+
+  // Add products one by one //
+  function handleAddProduct() {
+    dispatch(updateProduct({ id }));
+  }
+  
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
       <RemoveCircleOutlineOutlinedIcon
@@ -20,7 +28,11 @@ const QuantityControllerButton = ({ quantity, id }) => {
         fontSize="small"
       />
       <span style={{ margin: "0 .2rem", fontWeight: "bold" }}>{quantity}</span>
-      <ControlPointOutlinedIcon sx={{ cursor: "pointer" }} fontSize="small" />
+      <ControlPointOutlinedIcon
+        onClick={handleAddProduct}
+        sx={{ cursor: "pointer" }}
+        fontSize="small"
+      />
     </Box>
   );
 };

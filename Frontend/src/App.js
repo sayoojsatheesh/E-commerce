@@ -1,3 +1,5 @@
+// React //
+import { useEffect } from "react";
 // Other //
 import { Routes, Route } from "react-router-dom";
 
@@ -10,11 +12,13 @@ import Footer from "./Components/Shared/Footer/Footer";
 import DisplayProducts from "./Pages/DisplayProducts/DisplayProducts";
 import SingleProduct from "./Pages/SingleProduct/SingleProduct";
 import CartPage from "./Components/CartPage/CartPage";
+import ScrollToTop from "./Components/Shared/ScrollToTop/ScrollToTop";
 
 function App() {
   return (
     <div>
       <Navbar />
+      <ScrollToTop />
       <Routes>
         <Route path="/products/all" element={<DisplayProducts />} />
         <Route path="/products/men" element={<DisplayProducts />} />

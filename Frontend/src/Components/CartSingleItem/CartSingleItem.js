@@ -4,7 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 // Custom //
 import QuantityControllerButton from "../QuantityControllerButton/QuantityControllerButton";
 import formatNumberWithSpaces from "../../Utilis/FormatPrice";
-import { removeProduct } from "../../features/productsSlice";
+import { removeProduct, removeAllProduct } from "../../features/productsSlice";
 // Redux //
 import { useDispatch } from "react-redux";
 
@@ -12,9 +12,17 @@ const CartSingleItem = ({ productData, endingPath, id }) => {
   const dispatch = useDispatch();
   let endingPathBoolean = endingPath === "cart";
 
+// Delete the Product //
   function handleDelete() {
-    dispatch(removeProduct({type:'cart',removeCount:'all',id}))
+    dispatch(
+      removeProduct({
+        type: `${endingPathBoolean ? "cart" : ""}`,
+        removeCount: "all",
+        id,
+      })
+    );
   }
+
   return (
     <Box
       sx={{

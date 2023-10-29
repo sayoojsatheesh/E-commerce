@@ -43,6 +43,7 @@ export const productSlice = createSlice({
           state.cartList.push({
             ...action.payload,
             quantity,
+            totalAmount,
           });
         }
         state.totalItemsInCart = state.cartList.reduce((accumulator, item) => {
@@ -53,7 +54,8 @@ export const productSlice = createSlice({
           (item) => action.payload.id === item.id
         );
         if (index === -1) {
-          state.favourites.push({ ...action.payload });
+          let totalAmount = action.payload.price;
+          state.favourites.push({ ...action.payload, totalAmount });
         }
         state.totalItemsInFavourites = state.favourites.length;
       }
@@ -78,8 +80,6 @@ export const productSlice = createSlice({
           );
           let quantity = state.cartList[index].quantity - 1;
           let totalAmount = quantity * state.cartList[index].price;
-          console.log(" totalAmount =", totalAmount);
-
           if (quantity == 0) {
             let newArray = state.cartList.filter((item) => {
               return item.id !== action.payload.id;
@@ -111,7 +111,63 @@ export const productSlice = createSlice({
           );
         }
       } else {
+        let newArray = state.favourites.filter((item) => {
+          return item.id !== action.payload.id;
+        });
+        state.favourites = newArray;
+        state.totalItemsInFavourites = state.favourites.reduce(
+          (accumulator, item) => {
+            return accumulator + item?.quantity;
+          },
+          0
+        );
       }
+      // Saving in Local Storage //
+      localStorage.setItem("cartData", JSON.stringify(state.cartList));
+      localStorage.setItem(
+        "totalItemsInCart",
+        JSON.stringify(state.totalItemsInCart)
+      );
+      localStorage.setItem("favouritesData", JSON.stringify(state.favourites));
+      localStorage.setItem(
+        "totalItemsInFavourites",
+        JSON.stringify(state.totalItemsInFavourites)
+      );
+    },
+    removeAllProduct: (state, action) => {
+      if (action.payload.type === "cart") {
+        state.cartList = [];
+        state.totalItemsInCart = 0;
+      } else {
+        state.favourites = [];
+        state.totalItemsInFavourites = 0;
+      }
+      // Saving in Local Storage //
+      localStorage.setItem("cartData", JSON.stringify(state.cartList));
+      localStorage.setItem(
+        "totalItemsInCart",
+        JSON.stringify(state.totalItemsInCart)
+      );
+      localStorage.setItem("favouritesData", JSON.stringify(state.favourites));
+      localStorage.setItem(
+        "totalItemsInFavourites",
+        JSON.stringify(state.totalItemsInFavourites)
+      );
+    },
+    updateProduct: (state, action) => {
+      let index = state.cartList.findIndex(
+        (item) => action.payload.id === item.id
+      );
+      let quantity = state.cartList[index].quantity + 1;
+      let totalAmount = quantity * state.cartList[index].price;
+      state.cartList[index] = {
+        ...state.cartList[index],
+        quantity,
+        totalAmount,
+      };
+      state.totalItemsInCart = state.cartList.reduce((accumulator, item) => {
+        return accumulator + item?.quantity;
+      }, 0);
       // Saving in Local Storage //
       localStorage.setItem("cartData", JSON.stringify(state.cartList));
       localStorage.setItem(
@@ -127,6 +183,7 @@ export const productSlice = createSlice({
   },
 });
 
-export const { addProduct, removeProduct } = productSlice.actions;
+export const { addProduct, removeProduct, removeAllProduct,updateProduct } =
+  productSlice.actions;
 
 export default productSlice.reducer;
