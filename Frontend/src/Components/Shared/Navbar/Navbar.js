@@ -24,7 +24,7 @@ const styles = {
   },
 };
 
-const Navbar = () => {
+const Navbar = ({  setshowSearchPage }) => {
   const theme = useTheme();
   const dontShowMenuIcon = useMediaQuery(theme.breakpoints.down("md"));
   const [openDrawer, setopenDrawer] = useState(false);
@@ -37,6 +37,12 @@ const Navbar = () => {
   const favItems = useSelector((state) => {
     return state.products.totalItemsInFavourites;
   });
+
+  function handleShowSearchPage() {
+    setshowSearchPage((prevState) => {
+      return !prevState;
+    });
+  }
 
   return (
     <div
@@ -65,9 +71,14 @@ const Navbar = () => {
           </Link>
         </div>
       )}
+
       <div className={classes.IconContainer}>
         {dontShowMenuIcon ? (
-          <SearchOutlinedIcon className={classes.IconColor} fontSize="large" />
+          <SearchOutlinedIcon
+            onClick={handleShowSearchPage}
+            className={classes.IconColor}
+            fontSize="large"
+          />
         ) : (
           <SearchBar />
         )}

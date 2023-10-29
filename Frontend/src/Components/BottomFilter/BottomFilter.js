@@ -37,12 +37,12 @@ const BottomFilter = ({
     setopenBottomFilter(open);
   };
 
-  let coloursCount = colours.length == 0 ? "" : `(${colours.length})`;
+  let coloursCount = colours.length === 0 ? "" : `(${colours.length})`;
 
   let genderCount = countTrueFalseKeys(genders);
 
   return (
-    <Box sx={{ width: "100%" }}>
+   
       <Drawer
         transitionDuration={{ enter: 900, exit: 900 }}
         anchor="bottom"
@@ -82,7 +82,7 @@ const BottomFilter = ({
           <ColourPicker setcolours={setcolours} colours={colours} />
         </Box>
       </Drawer>
-    </Box>
+   
   );
 };
 
