@@ -66,7 +66,7 @@ const BottomFilter = ({
           <h3>Filters</h3>
           <h3>Sort By</h3>
           <Filters setsortBy={setsortBy} sortBy={sortBy} />
-          {endingPath == "all" ? (
+          {endingPath === "all" ? (
             <>
               <h3>Gender {genderCount}</h3>
               <GenderSelector genders={genders} setgenders={setgenders} />
