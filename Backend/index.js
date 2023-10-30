@@ -1,12 +1,9 @@
-const fs = require('fs');
-const path = require('path');
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const HttpError = require('./models/http-error');
 const itemsRoutes=require('./routes/products-routes')
 const singleItemRoute=require('./routes/singleproducts-routes')
+const searchProductsRoute=require('./routes/searchproducts-routes')
 
 const app = express();
 
@@ -25,6 +22,7 @@ app.use((req, res, next) => {
 
 app.use('/api/items', itemsRoutes);
 app.use('/api/SingleProduct', singleItemRoute);
+app.use('/api/SearchProducts', searchProductsRoute);
 
 mongoose
   .connect(
