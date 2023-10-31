@@ -179,7 +179,7 @@ const DisplayProducts = () => {
             loader={<div className={classes.Loader}>Loading More...</div>}
           >
             <Box
-              sx={{ width: "100vw", display: "flex", justifyContent: "center" }}
+              sx={{ width: "100%", display: "flex", justifyContent: "center" }}
             >
               <Grid
                 container

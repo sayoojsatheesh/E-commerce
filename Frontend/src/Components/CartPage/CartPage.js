@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 // Custom //
 import CartSingleItem from "../CartSingleItem/CartSingleItem";
 import { removeAllProduct } from "../../features/productsSlice";
+import formatNumberWithSpaces from "../../Utilis/FormatPrice";
 // Redux //
 import { useDispatch } from "react-redux";
 
@@ -29,6 +30,19 @@ const CartPage = () => {
     return state.products[key];
   });
 
+  let totalItems = cartPageItems.reduce(
+    ({ acc, totalAmount }, item) => {
+      let amount = item.quantity * item.price;
+      return { acc: acc + item.quantity, totalAmount: totalAmount + amount };
+    },
+    { acc: 0, totalAmount: 0 }
+  );
+  console.log(
+    "cartPageItems =",
+    cartPageItems,
+    totalItems.acc,
+    totalItems.totalAmount
+  );
   // Delete all products in cart or favourites//
   function handleDeleteAllProducts() {
     dispatch(removeAllProduct({ type: `${endingPathBoolean ? "cart" : ""}` }));
@@ -65,7 +79,9 @@ const CartPage = () => {
             justifyContent: "center",
           }}
         >
-          <h1 className={classes.EmptyHeading}>Your {endingPathBoolean?'Cart':'Wishlist'} is Empty</h1>
+          <h1 className={classes.EmptyHeading}>
+            Your {endingPathBoolean ? "Cart" : "Wishlist"} is Empty
+          </h1>
           <Link
             style={{ textDecoration: "none", color: "black" }}
             to="/products/all"
@@ -76,6 +92,26 @@ const CartPage = () => {
           </Link>
         </Box>
       )}
+      {cartPageItems.length > 0 && endingPath === "cart" ? (
+        <Box className={classes.TotalAmountContainer}>
+          <Box sx={{ minWidth: "250px" }}>
+            <Box sx={{ display: "flex", columnGap: "25px" }}>
+              <Box className={classes.SubTotal}>
+                <span>Sub-Total</span>
+                <span style={{ fontSize: ".8rem", color: "gray" }}>
+                  {totalItems.acc} Items
+                </span>
+              </Box>
+              <Box sx={{ fontSize: "1.7rem" }}>
+                ₹{formatNumberWithSpaces(totalItems.totalAmount)}
+              </Box>
+            </Box>
+            <Box>
+              <button className={classes.CheckoutButton}>Checkout</button>
+            </Box>
+          </Box>
+        </Box>
+      ) : null}
     </Box>
   );
 };
