@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 // Other //
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // Custom //
 import CartSingleItem from "../CartSingleItem/CartSingleItem";
 import { removeAllProduct } from "../../features/productsSlice";
@@ -30,6 +32,7 @@ const CartPage = () => {
     return state.products[key];
   });
 
+  // Calculating total Items and Amount //
   let totalItems = cartPageItems.reduce(
     ({ acc, totalAmount }, item) => {
       let amount = item.quantity * item.price;
@@ -37,15 +40,19 @@ const CartPage = () => {
     },
     { acc: 0, totalAmount: 0 }
   );
-  console.log(
-    "cartPageItems =",
-    cartPageItems,
-    totalItems.acc,
-    totalItems.totalAmount
-  );
+
   // Delete all products in cart or favourites//
   function handleDeleteAllProducts() {
     dispatch(removeAllProduct({ type: `${endingPathBoolean ? "cart" : ""}` }));
+  }
+
+  function handleCheckOut() {
+    setTimeout(function () {
+      handleDeleteAllProducts();
+      toast.success("Order Successful", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }, 1000);
   }
 
   return (
@@ -107,11 +114,17 @@ const CartPage = () => {
               </Box>
             </Box>
             <Box>
-              <button className={classes.CheckoutButton}>Checkout</button>
+              <button
+                onClick={handleCheckOut}
+                className={classes.CheckoutButton}
+              >
+                Checkout
+              </button>
             </Box>
           </Box>
         </Box>
       ) : null}
+      <ToastContainer />
     </Box>
   );
 };
