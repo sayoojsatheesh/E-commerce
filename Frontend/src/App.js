@@ -2,7 +2,6 @@
 import { useState } from "react";
 // Other //
 import { Routes, Route } from "react-router-dom";
-
 // CSS //
 import "./App.css";
 // Custom Component //
