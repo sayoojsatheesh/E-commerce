@@ -1,28 +1,28 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const itemsRoutes=require('./routes/products-routes')
-const singleItemRoute=require('./routes/singleproducts-routes')
-const searchProductsRoute=require('./routes/searchproducts-routes')
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const itemsRoutes = require("./routes/products-routes");
+const singleItemRoute = require("./routes/singleproducts-routes");
+const searchProductsRoute = require("./routes/searchproducts-routes");
 
 const app = express();
 
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
 
   next();
 });
 
-app.use('/api/items', itemsRoutes);
-app.use('/api/SingleProduct', singleItemRoute);
-app.use('/api/SearchProducts', searchProductsRoute);
+app.use("/api/items", itemsRoutes);
+app.use("/api/SingleProduct", singleItemRoute);
+app.use("/api/SearchProducts", searchProductsRoute);
 
 mongoose
   .connect(
@@ -31,6 +31,6 @@ mongoose
   .then(() => {
     app.listen(5000);
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(err);
   });
