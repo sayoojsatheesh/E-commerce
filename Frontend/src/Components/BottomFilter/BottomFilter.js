@@ -1,9 +1,8 @@
+// React //
 import React from "react";
-
 // MUI //
 import { Drawer, Box } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
-
 // CSS //
 import classes from "./BottomFiler.module.css";
 // Custom//

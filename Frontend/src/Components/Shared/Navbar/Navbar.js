@@ -24,7 +24,7 @@ const styles = {
   },
 };
 
-const Navbar = ({  setshowSearchPage }) => {
+const Navbar = ({ setshowSearchPage }) => {
   const theme = useTheme();
   const dontShowMenuIcon = useMediaQuery(theme.breakpoints.down("md"));
   const [openDrawer, setopenDrawer] = useState(false);
@@ -80,7 +80,7 @@ const Navbar = ({  setshowSearchPage }) => {
             fontSize="large"
           />
         ) : (
-          <SearchBar />
+          <SearchBar handleShowSearchPage={handleShowSearchPage} />
         )}
         <Badge badgeContent={favItems} color="info">
           <Link style={styles.linkStyle} to="/products/favourites">

@@ -11,12 +11,11 @@ import SingleProductSkeleton from "../../Components/SingleProductSkeleton/Single
 import SizeSelector from "../../Components/SizeSelector/SizeSelector";
 import ProductReview from "../../Components/ProductReview/ProductReview";
 import ProductImageViewer from "../../Components/ProductImageViewer/ProductImageViewer";
-import { addProduct } from "../../features/productsSlice";
-
+import { addProduct, removeProduct } from "../../features/productsSlice";
 // Other //
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // CSS //
 import classes from "./SingleProduct.module.css";
 
@@ -28,6 +27,14 @@ const SingleProduct = () => {
   const [imageUrl, setImageUrl] = useState([]);
 
   const dispatch = useDispatch();
+
+  let favouritesItems = useSelector((state) => {
+    return state.products["favourites"];
+  });
+
+  let productInFavourites = favouritesItems.some((item) => {
+    return item.id === productData.id;
+  });
 
   useEffect(() => {
     getSingleProduct();
@@ -88,15 +95,26 @@ const SingleProduct = () => {
   }
 
   function handleFavButton() {
-    dispatch(
-      addProduct({
-        title: productData.title,
-        subTitle: productData.subTitle,
-        price: productData.price.CurrentPrice,
-        imageURL: imageUrl[0].img,
-        id: productData.id,
-      })
-    );
+    if (productInFavourites) {
+      dispatch(
+        removeProduct({
+          type: "Fav",
+          removeCount: "all",
+          id: productData.id,
+        })
+      );
+    }else{
+      dispatch(
+        addProduct({
+          type: "Fav",
+          title: productData.title,
+          subTitle: productData.subTitle,
+          price: productData.price.CurrentPrice,
+          imageURL: imageUrl[0].img,
+          id: productData.id,
+        })
+      );
+    }
   }
 
   return (
@@ -145,12 +163,12 @@ const SingleProduct = () => {
             >
               <button
                 onClick={handleFavButton}
-                className={`${classes.WishListButton} ${classes.AddButton}`}
+                className={`${classes.WishListButton} ${classes.AddButton} `}
               >
                 Favourite
                 <svg
                   stroke="currentColor"
-                  fill="currentColor"
+                  fill={productInFavourites ? "red" : `currentColor`}
                   strokeWidth="0"
                   viewBox="0 0 512 512"
                   height="20"

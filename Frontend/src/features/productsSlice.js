@@ -31,9 +31,9 @@ export const productSlice = createSlice({
         let index = state.cartList.findIndex(
           (item) => action.payload.id === item.id
         );
-        let quantity = index == -1 ? 1 : state.cartList[index].quantity + 1;
+        let quantity = index === -1 ? 1 : state.cartList[index].quantity + 1;
         let totalAmount = quantity * action.payload.price;
-        if (index != -1) {
+        if (index !== -1) {
           state.cartList[index] = {
             ...action.payload,
             quantity,
@@ -80,7 +80,7 @@ export const productSlice = createSlice({
           );
           let quantity = state.cartList[index].quantity - 1;
           let totalAmount = quantity * state.cartList[index].price;
-          if (quantity == 0) {
+          if (quantity === 0) {
             let newArray = state.cartList.filter((item) => {
               return item.id !== action.payload.id;
             });
@@ -115,12 +115,7 @@ export const productSlice = createSlice({
           return item.id !== action.payload.id;
         });
         state.favourites = newArray;
-        state.totalItemsInFavourites = state.favourites.reduce(
-          (accumulator, item) => {
-            return accumulator + item?.quantity;
-          },
-          0
-        );
+        state.totalItemsInFavourites = state.favourites.length;
       }
       // Saving in Local Storage //
       localStorage.setItem("cartData", JSON.stringify(state.cartList));
@@ -183,7 +178,7 @@ export const productSlice = createSlice({
   },
 });
 
-export const { addProduct, removeProduct, removeAllProduct,updateProduct } =
+export const { addProduct, removeProduct, removeAllProduct, updateProduct } =
   productSlice.actions;
 
 export default productSlice.reducer;

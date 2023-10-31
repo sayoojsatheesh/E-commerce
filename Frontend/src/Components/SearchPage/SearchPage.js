@@ -65,10 +65,9 @@ const SearchPage = ({ showSearchPage, setshowSearchPage }) => {
             justifyContent: "space-between",
             alignItems: "center",
             padding: mediumScreen ? ".5em 1.9em" : ".5em 1em",
-
           }}
         >
-          <Box sx={{width:'70%'}}>
+          <Box sx={{ width: "70%" }}>
             <SearchBarGrowing handleInputChange={handleInputChange} />
           </Box>
           <Box
@@ -99,7 +98,17 @@ const SearchPage = ({ showSearchPage, setshowSearchPage }) => {
               ))}
             </Grid>
           ) : (
-            <LoadingIcon />
+            <Box
+              sx={{
+                width: "100vw",
+                height: "100vh",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <LoadingIcon />
+            </Box>
           )}
         </Box>
       </Box>

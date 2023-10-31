@@ -65,7 +65,7 @@ const CartPage = () => {
             justifyContent: "center",
           }}
         >
-          <h1 className={classes.EmptyHeading}>Your cart is Empty</h1>
+          <h1 className={classes.EmptyHeading}>Your {endingPathBoolean?'Cart':'Wishlist'} is Empty</h1>
           <Link
             style={{ textDecoration: "none", color: "black" }}
             to="/products/all"

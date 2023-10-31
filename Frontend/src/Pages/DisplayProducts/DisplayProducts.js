@@ -60,7 +60,7 @@ const DisplayProducts = () => {
     if (filters) {
       refetch();
     }
-  }, [filters, endingPath, genders, colours,sortBy]);
+  }, [filters, endingPath, genders, colours, sortBy]);
 
   // Get Products data //
   async function fetchData(offset = 0) {
@@ -178,21 +178,25 @@ const DisplayProducts = () => {
             }
             loader={<div className={classes.Loader}>Loading More...</div>}
           >
-            <Grid
-              container
-              sx={{
-                paddingLeft: mediumScreen ? "1.5em" : "",
-                paddingRight: mediumScreen ? "1.5em" : "",
-                width: "100%",
-              }}
-              spacing={2}
+            <Box
+              sx={{ width: "100vw", display: "flex", justifyContent: "center" }}
             >
-              {flattenData.map((item) => (
-                <Grid item key={item._id} xs={6} md={4}>
-                  <ProductsCard isFetching={isFetching} data={item} />
-                </Grid>
-              ))}
-            </Grid>
+              <Grid
+                container
+                sx={{
+                  paddingLeft: mediumScreen ? "1.5em" : "",
+                  paddingRight: mediumScreen ? "1.5em" : "",
+                  width: "100%",
+                }}
+                spacing={2}
+              >
+                {flattenData.map((item) => (
+                  <Grid item key={item._id} xs={6} md={4}>
+                    <ProductsCard isFetching={isFetching} data={item} />
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
           </InfiniteScroll>
         ) : (
           <LoadingSkeleton mediumScreen={mediumScreen} />
