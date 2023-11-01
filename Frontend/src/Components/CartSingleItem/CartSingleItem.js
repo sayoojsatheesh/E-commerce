@@ -27,19 +27,19 @@ const CartSingleItem = ({ productData, endingPath, id }) => {
   }
 
   return (
-    <Link
-      style={{ textDecoration: "none", color: "black" }}
-      to={`/products/${id}`}
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        marginTop: ".5rem",
+        alignItems: "center",
+        gap: 2,
+        cursor: "pointer",
+      }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginTop: ".5rem",
-          alignItems: "center",
-          gap: 2,
-          cursor: "pointer",
-        }}
+      <Link
+        style={{ textDecoration: "none", color: "black" }}
+        to={`/products/${id}`}
       >
         <span style={{ maxWidth: "100px", width: "30%" }}>
           <img
@@ -53,31 +53,31 @@ const CartSingleItem = ({ productData, endingPath, id }) => {
           </Box>
           <Box sx={{ fontSize: "10px" }}>{productData.subTitle}</Box>
         </span>
-        {endingPathBoolean ? (
-          <span style={{ minWidth: "70px", width: "20%" }}>
-            <QuantityControllerButton id={id} quantity={productData.quantity} />
-          </span>
-        ) : null}
-        <span
-          style={{
-            width: "20%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Box sx={{ fontWeight: "bold", fontSize: "14px", minWidth: "65px" }}>
-            ₹ {formatNumberWithSpaces(productData.totalAmount)}
-          </Box>
-          <Box sx={{ textAlign: "center", color: "red", cursor: "pointer" }}>
-            <Tooltip title="Delete">
-              <DeleteIcon onClick={handleDelete} fontSize="small" />
-            </Tooltip>
-          </Box>
+      </Link>
+      {endingPathBoolean ? (
+        <span style={{ minWidth: "70px", width: "20%" }}>
+          <QuantityControllerButton id={id} quantity={productData.quantity} />
         </span>
-      </Box>
-    </Link>
+      ) : null}
+      <span
+        style={{
+          width: "20%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Box sx={{ fontWeight: "bold", fontSize: "14px", minWidth: "65px" }}>
+          ₹ {formatNumberWithSpaces(productData.totalAmount)}
+        </Box>
+        <Box sx={{ textAlign: "center", color: "red", cursor: "pointer" }}>
+          <Tooltip title="Delete">
+            <DeleteIcon onClick={handleDelete} fontSize="small" />
+          </Tooltip>
+        </Box>
+      </span>
+    </Box>
   );
 };
 
