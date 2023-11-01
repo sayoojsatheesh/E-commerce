@@ -31,7 +31,9 @@ const LeftSideDrawer = (props) => {
         <Link
           style={{ textDecoration: "none", color: "black" }}
           to="/products/all"
-          onClick={handleDrawerClose}
+          onClick={() => {
+            props.setopenDrawer(false);
+          }}
         >
           <Box>All</Box>
         </Link>
@@ -39,7 +41,9 @@ const LeftSideDrawer = (props) => {
         <Link
           style={{ textDecoration: "none", color: "black" }}
           to="/products/men"
-          onClick={handleDrawerClose}
+          onClick={() => {
+            props.setopenDrawer(false);
+          }}
         >
           <Box>Men</Box>
         </Link>
@@ -47,7 +51,9 @@ const LeftSideDrawer = (props) => {
         <Link
           style={{ textDecoration: "none", color: "black" }}
           to="/products/women"
-          onClick={handleDrawerClose}
+          onClick={() => {
+            props.setopenDrawer(false);
+          }}
         >
           <Box>Women</Box>
         </Link>
@@ -55,7 +61,9 @@ const LeftSideDrawer = (props) => {
         <Link
           style={{ textDecoration: "none", color: "black" }}
           to="/products/kids"
-          onClick={handleDrawerClose}
+          onClick={() => {
+            props.setopenDrawer(false);
+          }}
         >
           <Box>Kids</Box>
         </Link>
