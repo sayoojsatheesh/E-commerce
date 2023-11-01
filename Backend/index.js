@@ -28,7 +28,7 @@ app.use("/api/SearchProducts", searchProductsRoute);
 
 mongoose
   .connect(
-    `mongodb+srv://sayooj0076:${process.env.DB_PASSWORD}@cluster0.7kjwjeq.mongodb.net/ECommerce?retryWrites=true&w=majority`
+    `mongodb+srv://sayooj0076:${process.env.DB_PASSWORD}@cluster0.7kjwjeq.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
   )
   .then(() => {
     app.listen(5000);
