@@ -37,23 +37,28 @@ const CartSingleItem = ({ productData, endingPath, id }) => {
         cursor: "pointer",
       }}
     >
-      <Link
-        style={{ textDecoration: "none", color: "black" }}
-        to={`/products/${id}`}
-      >
-        <span style={{ maxWidth: "100px", width: "30%" }}>
+      <span style={{ maxWidth: "100px", width: "30%" }}>
+        <Link
+          style={{ textDecoration: "none", color: "black" }}
+          to={`/products/${id}`}
+        >
           <img
             src={productData.imageURL}
             style={{ width: "100%", height: "100%" }}
           />
-        </span>
-        <span style={{ width: "30%" }}>
+        </Link>
+      </span>
+      <span style={{ width: "30%" }}>
+        <Link
+          style={{ textDecoration: "none", color: "black" }}
+          to={`/products/${id}`}
+        >
           <Box sx={{ fontWeight: "bold", fontSize: "14px" }}>
             {productData.title}
           </Box>
           <Box sx={{ fontSize: "10px" }}>{productData.subTitle}</Box>
-        </span>
-      </Link>
+        </Link>
+      </span>
       {endingPathBoolean ? (
         <span style={{ minWidth: "70px", width: "20%" }}>
           <QuantityControllerButton id={id} quantity={productData.quantity} />
