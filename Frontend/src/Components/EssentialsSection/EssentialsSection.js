@@ -34,7 +34,7 @@ const EssentialsSection = () => {
           >
             <CategoriesContainer
               buttonText={`Women's`}
-              imagePath={"/Images/Womens.webp"}
+              imagePath={"/Images/womens.webp"}
             />
           </Link>
         </Grid>
