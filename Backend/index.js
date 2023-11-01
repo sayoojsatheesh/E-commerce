@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+require("dotenv").config();
+
 const itemsRoutes = require("./routes/products-routes");
 const singleItemRoute = require("./routes/singleproducts-routes");
 const searchProductsRoute = require("./routes/searchproducts-routes");
@@ -26,7 +28,7 @@ app.use("/api/SearchProducts", searchProductsRoute);
 
 mongoose
   .connect(
-    `mongodb+srv://sayooj0076:eabTM4tUwGZwnFn3@cluster0.7kjwjeq.mongodb.net/ECommerce?retryWrites=true&w=majority`
+    `mongodb+srv://sayooj0076:${process.env.DB_PASSWORD}@cluster0.7kjwjeq.mongodb.net/ECommerce?retryWrites=true&w=majority`
   )
   .then(() => {
     app.listen(5000);
