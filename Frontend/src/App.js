@@ -9,10 +9,6 @@ import Navbar from "./Components/Shared/Navbar/Navbar";
 import Home from "./Pages/Home/Home";
 import Footer from "./Components/Shared/Footer/Footer";
 import ScrollToTop from "./Components/Shared/ScrollToTop/ScrollToTop";
-// import DisplayProducts from "./Pages/DisplayProducts/DisplayProducts";
-// import SingleProduct from "./Pages/SingleProduct/SingleProduct";
-// import CartPage from "./Components/CartPage/CartPage";
-// import SearchPage from "./Components/SearchPage/SearchPage";
 
 const DisplayProducts = React.lazy(() =>
   import("./Pages/DisplayProducts/DisplayProducts")
