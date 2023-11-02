@@ -15,7 +15,7 @@ const LoadingSkeleton = ({ mediumScreen, end }) => {
       }}
     >
       {[1, 2, 3, 4, 5, 6, 7, 8, 9].slice(0, end).map((item, index) => (
-        <Grid key={index} item xs={6} md={4}>
+        <Grid key={index} item xs={12} md={4}>
           <Skeleton variant="rectangular" height={mediumScreen ? 381 : 250} />
         </Grid>
       ))}
