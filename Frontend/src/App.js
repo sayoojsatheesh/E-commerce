@@ -9,6 +9,7 @@ import Navbar from "./Components/Shared/Navbar/Navbar";
 import Home from "./Pages/Home/Home";
 import Footer from "./Components/Shared/Footer/Footer";
 import ScrollToTop from "./Components/Shared/ScrollToTop/ScrollToTop";
+import LeftSideDrawer from "./Components/LeftSideDrawer/LeftSideDrawer";
 
 const DisplayProducts = React.lazy(() =>
   import("./Pages/DisplayProducts/DisplayProducts")
@@ -23,14 +24,19 @@ const SearchPage = React.lazy(() =>
 
 function App() {
   const [showSearchPage, setshowSearchPage] = useState(false);
+  const [openDrawer, setopenDrawer] = useState(false);
 
   return (
-    <Suspense >
+    <Suspense>
       <div>
         <Navbar
           showSearchPage={showSearchPage}
           setshowSearchPage={setshowSearchPage}
+          openDrawer={openDrawer}
+          setopenDrawer={setopenDrawer}
         />
+
+        <LeftSideDrawer openDrawer={openDrawer} setopenDrawer={setopenDrawer} />
         <ScrollToTop />
         <SearchPage
           showSearchPage={showSearchPage}

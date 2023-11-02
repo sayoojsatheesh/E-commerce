@@ -24,10 +24,9 @@ const styles = {
   },
 };
 
-const Navbar = ({ setshowSearchPage }) => {
+const Navbar = ({ setshowSearchPage, openDrawer, setopenDrawer }) => {
   const theme = useTheme();
   const dontShowMenuIcon = useMediaQuery(theme.breakpoints.down("md"));
-  const [openDrawer, setopenDrawer] = useState(false);
 
   // Getting Items count from Local Storage //
   const cartItems = useSelector((state) => {
@@ -44,6 +43,7 @@ const Navbar = ({ setshowSearchPage }) => {
     });
   }
 
+  console.log("openDrawer =", openDrawer);
   return (
     <div
       className={`${classes.NavbarContainer} ${
@@ -114,7 +114,6 @@ const Navbar = ({ setshowSearchPage }) => {
           />
         ) : null}
       </div>
-      <LeftSideDrawer openDrawer={openDrawer} setopenDrawer={setopenDrawer} />
     </div>
   );
 };

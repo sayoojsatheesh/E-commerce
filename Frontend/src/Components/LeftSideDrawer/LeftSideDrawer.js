@@ -4,6 +4,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
+import CloseIcon from "@mui/icons-material/Close";
 // Other //
 import { Link } from "react-router-dom";
 
@@ -12,8 +13,16 @@ const LeftSideDrawer = (props) => {
     props.setopenDrawer(false);
   }
 
+  console.log("props.openDrawer =", props.openDrawer);
+
   return (
-    <Drawer anchor="left" open={props.openDrawer} onClose={handleDrawerClose}>
+    <Drawer
+      transitionDuration={{ enter: 800, exit: 800 }}
+      anchor="left"
+      open={props.openDrawer}
+      onClose={handleDrawerClose}
+      sx={{ zIndex: "6000" }}
+    >
       <Box
         sx={{
           width: "100vw",
@@ -25,59 +34,49 @@ const LeftSideDrawer = (props) => {
           fontSize: "2.5rem",
           gap: "1rem",
           fontFamily: "monospace",
+          zIndex: "6000",
+          position: "relative",
         }}
-        role="presentation"
       >
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            padding: ".5rem 1rem",
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
+        >
+          <CloseIcon onClick={handleDrawerClose} fontSize="large" />
+        </Box>
         <Link
           style={{ textDecoration: "none", color: "black" }}
           to="/products/all"
         >
-          <Box
-            onClick={() => {
-              props.setopenDrawer(false);
-            }}
-          >
-            All
-          </Box>
+          <Box onClick={handleDrawerClose}>All</Box>
         </Link>
         <Divider />
         <Link
           style={{ textDecoration: "none", color: "black" }}
           to="/products/men"
         >
-          <Box
-            onClick={() => {
-              props.setopenDrawer(false);
-            }}
-          >
-            Men
-          </Box>
+          <Box onClick={handleDrawerClose}>Men</Box>
         </Link>
         <Divider />
         <Link
           style={{ textDecoration: "none", color: "black" }}
           to="/products/women"
         >
-          <Box
-            onClick={() => {
-              props.setopenDrawer(false);
-            }}
-          >
-            Women
-          </Box>
+          <Box onClick={handleDrawerClose}>Women</Box>
         </Link>
         <Divider />
         <Link
           style={{ textDecoration: "none", color: "black" }}
           to="/products/kids"
         >
-          <Box
-            onClick={() => {
-              props.setopenDrawer(false);
-            }}
-          >
-            Kids
-          </Box>
+          <Box onClick={handleDrawerClose}>Kids</Box>
         </Link>
         <Divider />
       </Box>
