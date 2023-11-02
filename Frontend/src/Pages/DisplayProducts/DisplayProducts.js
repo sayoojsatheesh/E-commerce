@@ -11,7 +11,6 @@ import classes from "./DisplayProduct.module.css";
 import SortByDropDown from "../../Components/SortByDropDown/SortByDropDown";
 import BottomFilter from "../../Components/BottomFilter/BottomFilter";
 import SideFilter from "../../Components/SideFilter/SideFilter";
-import LoadingIcon from "../../Components/Shared/LoadingIcon/LoadingIcon";
 // Other //
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -20,18 +19,30 @@ import { useLocation } from "react-router-dom";
 import "animate.css";
 
 const DisplayProducts = () => {
+  const storedFilterData = sessionStorage.getItem("filterBy");
+  const filterData = JSON.parse(storedFilterData);
   const theme = useTheme();
   const mediumScreen = useMediaQuery(theme.breakpoints.up("md"));
   const [showFilters, setshowFilters] = useState(mediumScreen);
-  const [sortBy, setsortBy] = useState("");
+  const [sortBy, setsortBy] = useState(
+    filterData?.sortBy ? filterData?.sortBy : ""
+  );
   const [filters, setfilters] = useState({});
-  const [genders, setgenders] = useState({
-    Men: false,
-    Female: false,
-    Kids: false,
-  });
-  const [colours, setcolours] = useState([]);
-  const [priceRange, setpriceRange] = useState([0, 20000]);
+  const [genders, setgenders] = useState(
+    filterData?.genders
+      ? filterData?.genders
+      : {
+          Men: false,
+          Female: false,
+          Kids: false,
+        }
+  );
+  const [colours, setcolours] = useState(
+    filterData?.colours ? filterData?.colours : []
+  );
+  const [priceRange, setpriceRange] = useState(
+    filterData?.priceRange ? filterData?.priceRange : [0, 20000]
+  );
 
   // Access the current path from the URL
   const location = useLocation();
@@ -66,6 +77,10 @@ const DisplayProducts = () => {
   // Get Products data //
   async function fetchData(offset = 0) {
     try {
+      sessionStorage.setItem(
+        "filterBy",
+        JSON.stringify({ genders, priceRange, colours, sortBy })
+      );
       const response = await axios.get(
         `${API_BASE_URL}/items?offset=${offset}`,
         {
@@ -97,8 +112,6 @@ const DisplayProducts = () => {
     <SideFilter
       openBottomFilter={showFilters}
       setopenBottomFilter={setshowFilters}
-      setsortBy={setsortBy}
-      sortBy={sortBy}
       genders={genders}
       setgenders={setgenders}
       priceRange={priceRange}
