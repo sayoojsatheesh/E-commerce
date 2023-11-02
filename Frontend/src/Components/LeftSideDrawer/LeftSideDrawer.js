@@ -1,5 +1,5 @@
 // React //
-import React from "react";
+import React, { useEffect, useState } from "react";
 // MUI //
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -9,16 +9,20 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
 
 const LeftSideDrawer = (props) => {
+  const [open, setopen] = useState(props.openDrawer);
   function handleDrawerClose() {
     props.setopenDrawer(false);
   }
+
+  useEffect(() => {
+    setopen(props.openDrawer);
+  }, [props.openDrawer]);
 
   return (
     <Drawer
       transitionDuration={{ enter: 800, exit: 800 }}
       anchor="left"
-      open={props.openDrawer}
-      onClose={handleDrawerClose}
+      open={open}
       sx={{ zIndex: "6000" }}
     >
       <Box
@@ -47,13 +51,24 @@ const LeftSideDrawer = (props) => {
             justifyContent: "flex-end",
           }}
         >
-          <CloseIcon onClick={handleDrawerClose} fontSize="large" />
+          <CloseIcon
+            onClick={() => {
+              props.setopenDrawer(false);
+            }}
+            fontSize="large"
+          />
         </Box>
         <Link
           style={{ textDecoration: "none", color: "black" }}
           to="/products/all"
         >
-          <Box onClick={handleDrawerClose}>All</Box>
+          <Box
+            onClick={() => {
+              props.setopenDrawer(false);
+            }}
+          >
+            All
+          </Box>
         </Link>
         <Divider />
         <Link

@@ -1,5 +1,3 @@
-// React //
-import { useState } from "react";
 // CSS //
 import classes from "./Navbar.module.css";
 // MUI Icons //
@@ -12,7 +10,6 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { useMediaQuery, useTheme, Badge } from "@mui/material";
 // Custom Components //
 import SearchBar from "../../SearchBar/SearchBar";
-import LeftSideDrawer from "../../LeftSideDrawer/LeftSideDrawer";
 // Other //
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
