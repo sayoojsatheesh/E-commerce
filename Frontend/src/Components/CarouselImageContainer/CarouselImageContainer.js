@@ -2,6 +2,8 @@
 import classes from "./CarouselImageContainer.module.css";
 // MUI //
 import { useMediaQuery, useTheme } from "@mui/material";
+// Other //
+import { Link } from "react-router-dom";
 
 const CarouselImageConatainer = (props) => {
   const theme = useTheme();
@@ -14,7 +16,12 @@ const CarouselImageConatainer = (props) => {
     >
       <img src={props.imagePath} alt="SlideImage" className={classes.Image} />
       {props.showButton ? (
-        <button className={classes.button}>SHOP NOW</button>
+        <Link
+          style={{ textDecoration: "none", color: "black" }}
+          to="/products/all"
+        >
+          <button className={classes.button}>SHOP NOW</button>
+        </Link>
       ) : null}
     </div>
   );
