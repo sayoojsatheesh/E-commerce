@@ -11,6 +11,7 @@ import classes from "./DisplayProduct.module.css";
 import SortByDropDown from "../../Components/SortByDropDown/SortByDropDown";
 import BottomFilter from "../../Components/BottomFilter/BottomFilter";
 import SideFilter from "../../Components/SideFilter/SideFilter";
+import LoadingIcon from "../../Components/Shared/LoadingIcon/LoadingIcon";
 // Other //
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
