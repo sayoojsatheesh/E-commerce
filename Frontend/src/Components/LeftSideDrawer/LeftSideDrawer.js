@@ -31,41 +31,53 @@ const LeftSideDrawer = (props) => {
         <Link
           style={{ textDecoration: "none", color: "black" }}
           to="/products/all"
-          onClick={() => {
-            props.setopenDrawer(false);
-          }}
         >
-          <Box>All</Box>
+          <Box
+            onClick={() => {
+              props.setopenDrawer(false);
+            }}
+          >
+            All
+          </Box>
         </Link>
         <Divider />
         <Link
           style={{ textDecoration: "none", color: "black" }}
           to="/products/men"
-          onClick={() => {
-            props.setopenDrawer(false);
-          }}
         >
-          <Box>Men</Box>
+          <Box
+            onClick={() => {
+              props.setopenDrawer(false);
+            }}
+          >
+            Men
+          </Box>
         </Link>
         <Divider />
         <Link
           style={{ textDecoration: "none", color: "black" }}
           to="/products/women"
-          onClick={() => {
-            props.setopenDrawer(false);
-          }}
         >
-          <Box>Women</Box>
+          <Box
+            onClick={() => {
+              props.setopenDrawer(false);
+            }}
+          >
+            Women
+          </Box>
         </Link>
         <Divider />
         <Link
           style={{ textDecoration: "none", color: "black" }}
           to="/products/kids"
-          onClick={() => {
-            props.setopenDrawer(false);
-          }}
         >
-          <Box>Kids</Box>
+          <Box
+            onClick={() => {
+              props.setopenDrawer(false);
+            }}
+          >
+            Kids
+          </Box>
         </Link>
         <Divider />
       </Box>
