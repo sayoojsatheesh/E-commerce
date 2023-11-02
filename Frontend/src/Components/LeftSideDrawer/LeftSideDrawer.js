@@ -13,8 +13,6 @@ const LeftSideDrawer = (props) => {
     props.setopenDrawer(false);
   }
 
-  console.log("props.openDrawer =", props.openDrawer);
-
   return (
     <Drawer
       transitionDuration={{ enter: 800, exit: 800 }}

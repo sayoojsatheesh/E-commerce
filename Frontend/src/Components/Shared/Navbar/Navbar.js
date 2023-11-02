@@ -43,7 +43,6 @@ const Navbar = ({ setshowSearchPage, openDrawer, setopenDrawer }) => {
     });
   }
 
-  console.log("openDrawer =", openDrawer);
   return (
     <div
       className={`${classes.NavbarContainer} ${
