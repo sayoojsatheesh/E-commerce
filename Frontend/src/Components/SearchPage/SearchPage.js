@@ -92,7 +92,7 @@ const SearchPage = ({ showSearchPage, setshowSearchPage }) => {
               spacing={2}
             >
               {productData.map((item) => (
-                <Grid item key={Math.random()} xs={6} md={4}>
+                <Grid item key={Math.random()} xs={12} sm={6} md={4}>
                   <ProductsCard data={item} />
                 </Grid>
               ))}
