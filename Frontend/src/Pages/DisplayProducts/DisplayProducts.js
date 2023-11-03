@@ -205,7 +205,7 @@ const DisplayProducts = () => {
                 spacing={2}
               >
                 {flattenData.map((item) => (
-                  <Grid item key={item._id} xs={12} md={4}>
+                  <Grid item key={item._id} xs={12} sm={6} md={4}>
                     <ProductsCard isFetching={isFetching} data={item} />
                   </Grid>
                 ))}
