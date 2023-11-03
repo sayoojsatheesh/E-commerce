@@ -30,7 +30,7 @@ const PriceRangeSlider = ({ priceRange, setpriceRange, refetch }) => {
         <div className={classes.PriceRangeContainer}>
           Selected Price Range:
           <span className={classes.PriceSelected}> {priceRange[0]}</span> -
-          <span className={classes.PriceSelected}>{priceRange[1]}</span>
+          <span className={classes.PriceSelected}> {priceRange[1]}</span>
         </div>
       </Box>
     </Box>
